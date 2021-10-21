@@ -1,0 +1,450 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"find",
+				"find_categories_v1"
+			],
+			[
+				"find_",
+				"find_categories_v1"
+			],
+			[
+				"data",
+				"data_high"
+			],
+			[
+				"count",
+				"counts_mid"
+			],
+			[
+				"patter",
+				"patterns_ambiguous"
+			],
+			[
+				"filer",
+				"filter_words"
+			],
+			[
+				"filter",
+				"filter_words"
+			],
+			[
+				"wro",
+				"word_count"
+			],
+			[
+				"asset",
+				"asset_dataset"
+			],
+			[
+				"iso",
+				"isoformat_template_pattern"
+			],
+			[
+				"current",
+				"current_year"
+			],
+			[
+				"date",
+				"datestring_year"
+			],
+			[
+				"curre",
+				"current_year"
+			],
+			[
+				"n",
+				"n_samples"
+			],
+			[
+				"ini",
+				"initial_key"
+			],
+			[
+				"copy",
+				"copy_position"
+			],
+			[
+				"__",
+				"__main__"
+			],
+			[
+				"strike",
+				"strike_adjustment"
+			],
+			[
+				"expi",
+				"expiries"
+			],
+			[
+				"expiry",
+				"expiry_schedule"
+			],
+			[
+				"strk",
+				"strike_adjustments"
+			],
+			[
+				"exp",
+				"expiry_adjustments"
+			],
+			[
+				"val",
+				"value_history"
+			],
+			[
+				"initial",
+				"initial_key"
+			],
+			[
+				"curen",
+				"current_spy_call_volume"
+			],
+			[
+				"uner",
+				"underlying_at_strike"
+			],
+			[
+				"under",
+				"underlying_at_strike"
+			],
+			[
+				"print",
+				"print_positions"
+			],
+			[
+				"ass",
+				"asset_string"
+			],
+			[
+				"p",
+				"print_positions"
+			],
+			[
+				"ba",
+				"basis"
+			],
+			[
+				"get",
+				"get_all_assets"
+			],
+			[
+				"port",
+				"portfolio_start"
+			],
+			[
+				"pr",
+				"print_portfolio"
+			],
+			[
+				"his",
+				"history"
+			],
+			[
+				"covere",
+				"covered_calls_2"
+			],
+			[
+				"prin",
+				"principal"
+			],
+			[
+				"gru",
+				"gru_hist"
+			],
+			[
+				"lstm",
+				"lstm_hist"
+			],
+			[
+				"x",
+				"xlabel"
+			],
+			[
+				"ex",
+				"ex_call"
+			],
+			[
+				"num",
+				"num_epochs"
+			],
+			[
+				"train_",
+				"train_target_pred"
+			],
+			[
+				"train",
+				"train_targets"
+			],
+			[
+				"y",
+				"y_train"
+			],
+			[
+				"max",
+				"max_pool2d"
+			],
+			[
+				"test",
+				"test_labels"
+			],
+			[
+				"le",
+				"learning_rate"
+			],
+			[
+				"valid",
+				"valid_labels"
+			],
+			[
+				"traini",
+				"training_features"
+			],
+			[
+				"dat",
+				"dataset_sizes"
+			],
+			[
+				"ac",
+				"acc_dic"
+			],
+			[
+				"acc_",
+				"acc_dics"
+			],
+			[
+				"loss",
+				"loss_dics"
+			],
+			[
+				"load",
+				"load_mnist_data"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"1 + 1",
+			"test.py",
+			"ls"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/nathan/Desktop/Portfolio Website",
+		"/Users/nathan/Desktop/Portfolio Website/nathanheidacker.github.io"
+	],
+	"file_history":
+	[
+		"/Users/nathan/Desktop/Northwestern/CS396/The-Magic-Squids/checkpoint-2/src",
+		"/Users/nathan/Desktop/Northwestern/CS337/NLP_Project_1/.gitignore",
+		"/Users/nathan/Downloads/gg2015.json",
+		"/Users/nathan/Desktop/AlphaGradientGIT/.gitignore",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/data/datatools.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/data/dataledger.csv",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/experiments/spy_cc_testing.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/algotools.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/experiments/optimizing.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/algos.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/diagnostics.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/data/SPY.csv",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/experiments/nn_training_example.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/experiments/general.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/finance.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/data/spy.csv",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/algorithm_helpers.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/data/load_data.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/data/format_data.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/data/spy-new.csv",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/finance_old",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/algorithm_helpers",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/algorithms/models.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/experiments/test_algorithm.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/CS349-Final-Project/experiments/test_model.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/final-project-nathanheidacker/algorithms/SPY.csv",
+		"/Users/nathan/Desktop/Northwestern/CS349/final-project-nathanheidacker/experiments/backtest.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/final-project-nathanheidacker/requirements.txt",
+		"/Users/nathan/Desktop/Northwestern/CS349/final-project-nathanheidacker/code/models.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/final-project-nathanheidacker/data/load_data.py",
+		"/Users/nathan/Desktop/Northwestern/CS349/final-project-nathanheidacker/data/spy.csv",
+		"/Users/nathan/Desktop/untitled.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/src/run_model.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/experiments/tests.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/src/models.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/experiments/p3.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/experiments/experiments.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/experiments/weights",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/experiments/p2.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/data/load_data.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/data/dogs.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/problems.md",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/data/Dogset/dogs.csv",
+		"/Users/nathan/Desktop/CS349/spring2021-hw6-deep-learning-nathanheidacker/experiments/p1.py",
+		"/Users/nathan/Desktop/CS349/spring2021-hw2-decision-trees-nathanheidacker/netid",
+		"/Users/nathan/Downloads/Miniconda3-py39_4.9.2-MacOSX-x86_64.sh",
+		"/Users/nathan/Desktop/CS349/spring2021-hw1-knn-nathanheidacker/README.md",
+		"/Users/nathan/Desktop/CS349/spring2021-hw1-knn-nathanheidacker/problems.md",
+		"/Users/nathan/Desktop/CS349/spring2021-hw1-knn-nathanheidacker/netid",
+		"/Users/nathan/Desktop/Practice Code/main.py",
+		"/Users/nathan/Desktop/Practice Code/test.py"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Portfolio.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 170.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}
