@@ -1,6 +1,0 @@
-alphagradient.Put.next
-======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.next

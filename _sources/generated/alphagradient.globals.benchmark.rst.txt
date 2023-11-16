@@ -1,6 +1,0 @@
-﻿alphagradient.globals.benchmark
-===============================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: globals.benchmark

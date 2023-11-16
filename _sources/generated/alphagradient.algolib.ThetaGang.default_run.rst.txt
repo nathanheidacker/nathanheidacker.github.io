@@ -1,6 +1,0 @@
-alphagradient.algolib.ThetaGang.default\_run
-============================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. automethod:: ThetaGang.default_run

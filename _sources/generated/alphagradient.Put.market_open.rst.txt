@@ -1,6 +1,0 @@
-alphagradient.Put.market\_open
-==============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.market_open

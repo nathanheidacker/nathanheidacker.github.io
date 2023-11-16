@@ -1,6 +1,0 @@
-alphagradient.Put.units
-=======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.units

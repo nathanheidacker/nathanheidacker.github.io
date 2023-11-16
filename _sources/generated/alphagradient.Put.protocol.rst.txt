@@ -1,6 +1,0 @@
-alphagradient.Put.protocol
-==========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.protocol

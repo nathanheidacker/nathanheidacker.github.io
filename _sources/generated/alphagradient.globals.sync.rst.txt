@@ -1,6 +1,0 @@
-﻿alphagradient.globals.sync
-==========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: globals.sync

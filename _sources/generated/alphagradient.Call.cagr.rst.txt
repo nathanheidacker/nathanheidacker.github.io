@@ -1,6 +1,0 @@
-alphagradient.Call.cagr
-=======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Call.cagr

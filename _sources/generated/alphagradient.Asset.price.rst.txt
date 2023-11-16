@@ -1,6 +1,0 @@
-alphagradient.Asset.price
-=========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.price

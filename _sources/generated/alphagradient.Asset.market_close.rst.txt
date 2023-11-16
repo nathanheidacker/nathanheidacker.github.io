@@ -1,6 +1,0 @@
-alphagradient.Asset.market\_close
-=================================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.market_close

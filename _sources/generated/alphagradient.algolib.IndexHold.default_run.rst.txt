@@ -1,6 +1,0 @@
-alphagradient.algolib.IndexHold.default\_run
-============================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. automethod:: IndexHold.default_run

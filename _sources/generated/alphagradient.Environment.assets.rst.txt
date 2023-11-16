@@ -1,6 +1,0 @@
-alphagradient.Environment.assets
-================================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Environment.assets

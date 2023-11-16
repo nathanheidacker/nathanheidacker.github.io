@@ -1,6 +1,0 @@
-alphagradient.Asset.alpha
-=========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Asset.alpha

@@ -1,6 +1,0 @@
-alphagradient.Stock.date
-========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Stock.date

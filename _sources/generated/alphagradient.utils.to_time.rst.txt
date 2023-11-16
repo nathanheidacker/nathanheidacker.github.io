@@ -1,6 +1,0 @@
-﻿alphagradient.utils.to\_time
-============================
-
-.. currentmodule:: alphagradient.utils
-
-.. autofunction:: to_time

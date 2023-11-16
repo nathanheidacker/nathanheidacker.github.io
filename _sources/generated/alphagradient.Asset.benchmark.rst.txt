@@ -1,6 +1,0 @@
-alphagradient.Asset.benchmark
-=============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.benchmark

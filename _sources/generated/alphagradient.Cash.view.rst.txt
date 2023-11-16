@@ -1,6 +1,0 @@
-alphagradient.Cash.view
-=======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Cash.view

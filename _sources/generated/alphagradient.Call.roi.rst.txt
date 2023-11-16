@@ -1,6 +1,0 @@
-alphagradient.Call.roi
-======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Call.roi

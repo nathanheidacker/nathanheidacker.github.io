@@ -1,6 +1,0 @@
-alphagradient.Call.open
-=======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Call.open

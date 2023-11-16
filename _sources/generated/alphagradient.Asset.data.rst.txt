@@ -1,6 +1,0 @@
-alphagradient.Asset.data
-========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.data

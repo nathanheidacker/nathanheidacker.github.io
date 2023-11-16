@@ -1,6 +1,0 @@
-alphagradient.Algorithm.date
-============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Algorithm.date

@@ -1,6 +1,0 @@
-alphagradient.Universe.coverage
-===============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Universe.coverage

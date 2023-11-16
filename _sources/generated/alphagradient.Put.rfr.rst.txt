@@ -1,6 +1,0 @@
-alphagradient.Put.rfr
-=====================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.rfr

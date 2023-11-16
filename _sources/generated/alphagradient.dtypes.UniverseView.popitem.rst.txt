@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.popitem
-=========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: UniverseView.popitem

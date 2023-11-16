@@ -1,6 +1,0 @@
-alphagradient.Asset.optional
-============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.optional

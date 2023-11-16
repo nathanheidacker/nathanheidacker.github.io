@@ -1,6 +1,0 @@
-alphagradient.Put.roi
-=====================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Put.roi

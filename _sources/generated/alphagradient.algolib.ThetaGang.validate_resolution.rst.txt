@@ -1,6 +1,0 @@
-alphagradient.algolib.ThetaGang.validate\_resolution
-====================================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. automethod:: ThetaGang.validate_resolution

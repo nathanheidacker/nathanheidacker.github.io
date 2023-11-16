@@ -1,6 +1,0 @@
-﻿alphagradient.Environment.status
-================================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Environment.status

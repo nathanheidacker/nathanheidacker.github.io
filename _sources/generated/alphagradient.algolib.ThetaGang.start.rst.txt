@@ -1,6 +1,0 @@
-alphagradient.algolib.ThetaGang.start
-=====================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. autoproperty:: ThetaGang.start

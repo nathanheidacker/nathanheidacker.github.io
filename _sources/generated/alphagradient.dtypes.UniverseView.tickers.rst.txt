@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.tickers
-=========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: UniverseView.tickers

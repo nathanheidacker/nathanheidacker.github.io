@@ -1,6 +1,0 @@
-alphagradient.dtypes.AssetData.prev
-===================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: AssetData.prev

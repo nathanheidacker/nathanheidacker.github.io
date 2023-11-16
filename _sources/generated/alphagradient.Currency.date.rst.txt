@@ -1,6 +1,0 @@
-alphagradient.Currency.date
-===========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Currency.date

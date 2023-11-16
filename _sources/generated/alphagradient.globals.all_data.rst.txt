@@ -1,6 +1,0 @@
-﻿alphagradient.globals.all\_data
-===============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: globals.all_data

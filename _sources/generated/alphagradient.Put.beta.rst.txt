@@ -1,6 +1,0 @@
-alphagradient.Put.beta
-======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Put.beta

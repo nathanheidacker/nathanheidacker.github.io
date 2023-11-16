@@ -1,6 +1,0 @@
-alphagradient.dtypes.Stats.change\_report
-=========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Stats.change_report

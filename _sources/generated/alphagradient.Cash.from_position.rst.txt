@@ -1,6 +1,0 @@
-alphagradient.Cash.from\_position
-=================================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Cash.from_position

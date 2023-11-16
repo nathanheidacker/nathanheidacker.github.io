@@ -1,6 +1,0 @@
-alphagradient.Call.beta
-=======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Call.beta

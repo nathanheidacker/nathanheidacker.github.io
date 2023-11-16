@@ -1,6 +1,0 @@
-alphagradient.Call.close\_value
-===============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Call.close_value

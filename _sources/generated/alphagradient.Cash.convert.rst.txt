@@ -1,6 +1,0 @@
-alphagradient.Cash.convert
-==========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Cash.convert

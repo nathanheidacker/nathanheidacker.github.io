@@ -1,6 +1,0 @@
-﻿alphagradient.dtypes.DatetimeLike
-=================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autodata:: DatetimeLike

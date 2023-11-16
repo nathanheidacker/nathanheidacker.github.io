@@ -1,6 +1,0 @@
-alphagradient.\_types.call
-==========================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: _types.call

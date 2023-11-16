@@ -1,6 +1,0 @@
-alphagradient.Put.cagr
-======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Put.cagr

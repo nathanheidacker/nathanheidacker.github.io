@@ -1,6 +1,0 @@
-alphagradient.Currency.market\_open
-===================================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: Currency.market_open

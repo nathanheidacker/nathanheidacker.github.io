@@ -1,6 +1,0 @@
-alphagradient.Universe.popitem
-==============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Universe.popitem

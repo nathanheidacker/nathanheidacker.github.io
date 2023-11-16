@@ -1,6 +1,0 @@
-﻿alphagradient.utils.get\_weekday
-================================
-
-.. currentmodule:: alphagradient.utils
-
-.. autofunction:: get_weekday

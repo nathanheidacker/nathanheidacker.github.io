@@ -1,6 +1,0 @@
-alphagradient.Put.open\_value
-=============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.open_value

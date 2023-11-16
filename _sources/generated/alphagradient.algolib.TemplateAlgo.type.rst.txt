@@ -1,6 +1,0 @@
-alphagradient.algolib.TemplateAlgo.type
-=======================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. autoattribute:: TemplateAlgo.type

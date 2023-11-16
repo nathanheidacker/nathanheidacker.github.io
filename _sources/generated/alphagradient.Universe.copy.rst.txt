@@ -1,6 +1,0 @@
-alphagradient.Universe.copy
-===========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Universe.copy

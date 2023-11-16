@@ -1,6 +1,0 @@
-alphagradient.dtypes.Position.average\_cost
-===========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: Position.average_cost

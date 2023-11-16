@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.errors
-========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: UniverseView.errors

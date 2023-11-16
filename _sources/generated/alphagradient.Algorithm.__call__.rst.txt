@@ -1,6 +1,0 @@
-alphagradient.Algorithm.\_\_call\_\_
-====================================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Algorithm.__call__

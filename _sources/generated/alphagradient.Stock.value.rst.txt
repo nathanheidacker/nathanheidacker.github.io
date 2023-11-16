@@ -1,6 +1,0 @@
-alphagradient.Stock.value
-=========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Stock.value

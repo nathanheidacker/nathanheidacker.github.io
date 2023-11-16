@@ -1,6 +1,0 @@
-alphagradient.dtypes.Performance.finalize
-=========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Performance.finalize

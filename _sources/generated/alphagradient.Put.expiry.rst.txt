@@ -1,6 +1,0 @@
-alphagradient.Put.expiry
-========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.expiry

@@ -1,6 +1,0 @@
-﻿alphagradient.globals.refresh
-=============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: globals.refresh

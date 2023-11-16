@@ -1,6 +1,0 @@
-alphagradient.Environment.resolution
-====================================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Environment.resolution

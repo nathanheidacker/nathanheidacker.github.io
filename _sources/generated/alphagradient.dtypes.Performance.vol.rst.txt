@@ -1,6 +1,0 @@
-alphagradient.dtypes.Performance.vol
-====================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Performance.vol

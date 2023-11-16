@@ -1,6 +1,0 @@
-alphagradient.Currency.quote
-============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Currency.quote

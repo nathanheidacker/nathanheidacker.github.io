@@ -1,6 +1,0 @@
-alphagradient.Put.type
-======================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: Put.type

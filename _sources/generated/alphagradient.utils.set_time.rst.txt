@@ -1,6 +1,0 @@
-﻿alphagradient.utils.set\_time
-=============================
-
-.. currentmodule:: alphagradient.utils
-
-.. autofunction:: set_time

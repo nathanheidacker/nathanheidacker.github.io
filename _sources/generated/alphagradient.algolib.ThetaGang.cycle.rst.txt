@@ -1,6 +1,0 @@
-alphagradient.algolib.ThetaGang.cycle
-=====================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. automethod:: ThetaGang.cycle

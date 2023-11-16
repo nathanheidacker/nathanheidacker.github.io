@@ -1,6 +1,0 @@
-alphagradient.Portfolio.cover
-=============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Portfolio.cover

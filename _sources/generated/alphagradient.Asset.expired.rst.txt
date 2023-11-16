@@ -1,6 +1,0 @@
-alphagradient.Asset.expired
-===========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.expired

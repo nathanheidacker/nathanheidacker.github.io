@@ -1,6 +1,0 @@
-alphagradient.Universe.pop
-==========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Universe.pop

@@ -1,6 +1,0 @@
-alphagradient.Stock.expire
-==========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Stock.expire

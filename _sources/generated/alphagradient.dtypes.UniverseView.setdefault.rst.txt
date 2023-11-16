@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.setdefault
-============================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: UniverseView.setdefault

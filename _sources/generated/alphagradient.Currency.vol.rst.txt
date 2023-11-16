@@ -1,6 +1,0 @@
-alphagradient.Currency.vol
-==========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Currency.vol

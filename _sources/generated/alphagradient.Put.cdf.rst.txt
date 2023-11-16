@@ -1,6 +1,0 @@
-alphagradient.Put.cdf
-=====================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Put.cdf

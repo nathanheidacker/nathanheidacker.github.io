@@ -1,6 +1,0 @@
-alphagradient.Put.spot
-======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.spot

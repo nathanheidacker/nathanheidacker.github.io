@@ -1,6 +1,0 @@
-alphagradient.dtypes.Performance.data
-=====================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: Performance.data

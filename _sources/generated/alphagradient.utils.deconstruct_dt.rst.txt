@@ -1,6 +1,0 @@
-﻿alphagradient.utils.deconstruct\_dt
-===================================
-
-.. currentmodule:: alphagradient.utils
-
-.. autofunction:: deconstruct_dt

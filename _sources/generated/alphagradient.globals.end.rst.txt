@@ -1,6 +1,0 @@
-﻿alphagradient.globals.end
-=========================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: globals.end

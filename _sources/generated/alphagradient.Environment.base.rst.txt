@@ -1,6 +1,0 @@
-alphagradient.Environment.base
-==============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Environment.base
