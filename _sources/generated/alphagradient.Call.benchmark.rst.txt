@@ -1,6 +1,0 @@
-alphagradient.Call.benchmark
-============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Call.benchmark

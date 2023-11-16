@@ -1,6 +1,0 @@
-alphagradient.Currency.valuate
-==============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Currency.valuate

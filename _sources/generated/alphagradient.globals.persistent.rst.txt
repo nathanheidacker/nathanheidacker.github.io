@@ -1,6 +1,0 @@
-﻿alphagradient.globals.persistent
-================================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: globals.persistent

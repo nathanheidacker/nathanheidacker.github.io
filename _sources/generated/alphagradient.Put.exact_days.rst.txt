@@ -1,6 +1,0 @@
-alphagradient.Put.exact\_days
-=============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Put.exact_days

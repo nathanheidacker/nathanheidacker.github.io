@@ -1,6 +1,0 @@
-alphagradient.Portfolio.longs
-=============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Portfolio.longs

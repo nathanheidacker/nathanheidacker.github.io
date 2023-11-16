@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.update
-========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: UniverseView.update

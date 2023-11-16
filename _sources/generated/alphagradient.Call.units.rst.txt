@@ -1,6 +1,0 @@
-alphagradient.Call.units
-========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Call.units

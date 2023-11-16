@@ -1,6 +1,0 @@
-alphagradient.Cash.from\_number
-===============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Cash.from_number

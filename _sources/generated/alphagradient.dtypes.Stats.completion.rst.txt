@@ -1,6 +1,0 @@
-alphagradient.dtypes.Stats.completion
-=====================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: Stats.completion

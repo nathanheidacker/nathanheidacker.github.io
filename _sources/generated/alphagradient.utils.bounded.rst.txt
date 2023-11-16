@@ -1,6 +1,0 @@
-﻿alphagradient.utils.bounded
-===========================
-
-.. currentmodule:: alphagradient.utils
-
-.. autofunction:: bounded

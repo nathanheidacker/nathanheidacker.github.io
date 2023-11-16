@@ -1,6 +1,0 @@
-alphagradient.Currency.base
-===========================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: Currency.base

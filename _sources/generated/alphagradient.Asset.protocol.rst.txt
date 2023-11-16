@@ -1,6 +1,0 @@
-alphagradient.Asset.protocol
-============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.protocol

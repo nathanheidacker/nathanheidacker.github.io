@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.supported
-===========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: UniverseView.supported

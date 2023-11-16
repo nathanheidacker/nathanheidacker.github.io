@@ -1,6 +1,0 @@
-alphagradient.dtypes.DataProtocol.REQUIRED
-==========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoattribute:: DataProtocol.REQUIRED

@@ -1,6 +1,0 @@
-alphagradient.Algorithm.setup
-=============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Algorithm.setup

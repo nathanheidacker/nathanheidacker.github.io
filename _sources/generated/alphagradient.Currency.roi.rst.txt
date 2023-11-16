@@ -1,6 +1,0 @@
-alphagradient.Currency.roi
-==========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Currency.roi

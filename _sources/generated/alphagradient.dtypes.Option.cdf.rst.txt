@@ -1,6 +1,0 @@
-alphagradient.dtypes.Option.cdf
-===============================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Option.cdf

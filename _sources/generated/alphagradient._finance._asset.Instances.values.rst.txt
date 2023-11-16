@@ -1,6 +1,0 @@
-alphagradient.\_finance.\_asset.Instances.values
-================================================
-
-.. currentmodule:: alphagradient._finance._asset
-
-.. automethod:: Instances.values

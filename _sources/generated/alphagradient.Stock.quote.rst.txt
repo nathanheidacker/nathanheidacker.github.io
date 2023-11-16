@@ -1,6 +1,0 @@
-alphagradient.Stock.quote
-=========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Stock.quote

@@ -1,6 +1,0 @@
-alphagradient.dtypes.PositionView.empty
-=======================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: PositionView.empty

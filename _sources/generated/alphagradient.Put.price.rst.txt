@@ -1,6 +1,0 @@
-alphagradient.Put.price
-=======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.price

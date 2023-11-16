@@ -1,6 +1,0 @@
-alphagradient.Asset.units
-=========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.units

@@ -1,6 +1,0 @@
-alphagradient.Environment.cover
-===============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Environment.cover

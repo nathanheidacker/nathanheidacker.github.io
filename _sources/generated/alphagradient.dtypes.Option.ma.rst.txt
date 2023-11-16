@@ -1,6 +1,0 @@
-alphagradient.dtypes.Option.ma
-==============================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Option.ma

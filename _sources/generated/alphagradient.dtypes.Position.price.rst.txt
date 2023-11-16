@@ -1,6 +1,0 @@
-alphagradient.dtypes.Position.price
-===================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: Position.price

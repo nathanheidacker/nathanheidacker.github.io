@@ -1,6 +1,0 @@
-alphagradient.Put.otm
-=====================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.otm

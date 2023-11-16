@@ -1,6 +1,0 @@
-alphagradient.Call.expire
-=========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Call.expire

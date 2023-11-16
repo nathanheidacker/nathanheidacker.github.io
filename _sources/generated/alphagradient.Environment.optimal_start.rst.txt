@@ -1,6 +1,0 @@
-alphagradient.Environment.optimal\_start
-========================================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Environment.optimal_start

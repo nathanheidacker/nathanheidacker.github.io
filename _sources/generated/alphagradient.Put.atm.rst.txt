@@ -1,6 +1,0 @@
-alphagradient.Put.atm
-=====================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.atm

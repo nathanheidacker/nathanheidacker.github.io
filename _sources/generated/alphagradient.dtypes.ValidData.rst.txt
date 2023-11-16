@@ -1,6 +1,0 @@
-﻿alphagradient.dtypes.ValidData
-==============================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autodata:: ValidData

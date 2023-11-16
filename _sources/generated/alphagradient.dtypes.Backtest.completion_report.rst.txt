@@ -1,6 +1,0 @@
-alphagradient.dtypes.Backtest.completion\_report
-================================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Backtest.completion_report

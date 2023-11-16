@@ -1,6 +1,0 @@
-alphagradient.dtypes.Backtest.profile
-=====================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Backtest.profile

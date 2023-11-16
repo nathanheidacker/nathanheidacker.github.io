@@ -1,6 +1,0 @@
-alphagradient.Portfolio.invest
-==============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Portfolio.invest

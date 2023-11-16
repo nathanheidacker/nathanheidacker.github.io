@@ -1,6 +1,0 @@
-alphagradient.Portfolio.positions
-=================================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Portfolio.positions

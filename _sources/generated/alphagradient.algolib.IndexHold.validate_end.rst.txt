@@ -1,6 +1,0 @@
-alphagradient.algolib.IndexHold.validate\_end
-=============================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. automethod:: IndexHold.validate_end

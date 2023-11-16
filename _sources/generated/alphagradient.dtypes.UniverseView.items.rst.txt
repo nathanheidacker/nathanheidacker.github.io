@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.items
-=======================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: UniverseView.items

@@ -1,6 +1,0 @@
-alphagradient.dtypes.Backtest.update
-====================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Backtest.update

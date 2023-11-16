@@ -1,6 +1,0 @@
-alphagradient.Portfolio.sell
-============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Portfolio.sell

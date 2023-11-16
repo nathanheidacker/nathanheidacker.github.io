@@ -1,6 +1,0 @@
-alphagradient.Stock.protocol
-============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Stock.protocol

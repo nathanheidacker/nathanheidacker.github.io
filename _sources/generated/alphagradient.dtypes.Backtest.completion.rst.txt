@@ -1,6 +1,0 @@
-alphagradient.dtypes.Backtest.completion
-========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: Backtest.completion

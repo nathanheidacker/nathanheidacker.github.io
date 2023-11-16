@@ -1,6 +1,0 @@
-alphagradient.Call.market\_open
-===============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Call.market_open

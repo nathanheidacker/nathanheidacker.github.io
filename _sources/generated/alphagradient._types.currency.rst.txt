@@ -1,6 +1,0 @@
-alphagradient.\_types.currency
-==============================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: _types.currency

@@ -1,6 +1,0 @@
-alphagradient.Currency.get\_settings
-====================================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Currency.get_settings

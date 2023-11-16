@@ -1,6 +1,0 @@
-alphagradient.dtypes.Option.expiry
-==================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: Option.expiry

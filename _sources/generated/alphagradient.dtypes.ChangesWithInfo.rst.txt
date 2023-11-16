@@ -1,6 +1,0 @@
-﻿alphagradient.dtypes.ChangesWithInfo
-====================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autodata:: ChangesWithInfo

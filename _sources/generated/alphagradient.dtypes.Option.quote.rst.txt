@@ -1,6 +1,0 @@
-alphagradient.dtypes.Option.quote
-=================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Option.quote

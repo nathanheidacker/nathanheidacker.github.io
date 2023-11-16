@@ -1,6 +1,0 @@
-alphagradient.Environment.times
-===============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Environment.times

@@ -1,6 +1,0 @@
-alphagradient.Universe.items
-============================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Universe.items

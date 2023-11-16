@@ -1,6 +1,0 @@
-alphagradient.Algorithm.validate\_resolution
-============================================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Algorithm.validate_resolution

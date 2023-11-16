@@ -1,6 +1,0 @@
-alphagradient.dtypes.DataProtocol.FLEXIBLE
-==========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoattribute:: DataProtocol.FLEXIBLE

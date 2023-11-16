@@ -1,6 +1,0 @@
-﻿alphagradient.dtypes.Trackable
-==============================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autodata:: Trackable

@@ -1,6 +1,0 @@
-alphagradient.dtypes.Performance.beta
-=====================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Performance.beta

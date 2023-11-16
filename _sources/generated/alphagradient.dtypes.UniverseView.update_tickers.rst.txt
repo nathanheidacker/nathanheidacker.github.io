@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.update\_tickers
-=================================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: UniverseView.update_tickers

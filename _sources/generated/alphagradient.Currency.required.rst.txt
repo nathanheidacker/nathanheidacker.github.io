@@ -1,6 +1,0 @@
-alphagradient.Currency.required
-===============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Currency.required

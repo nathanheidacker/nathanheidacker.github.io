@@ -1,6 +1,0 @@
-alphagradient.Call.type
-=======================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: Call.type

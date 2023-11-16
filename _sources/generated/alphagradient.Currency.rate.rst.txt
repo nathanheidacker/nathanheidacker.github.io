@@ -1,6 +1,0 @@
-alphagradient.Currency.rate
-===========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Currency.rate

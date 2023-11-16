@@ -1,6 +1,0 @@
-alphagradient.Cash.update\_history
-==================================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Cash.update_history

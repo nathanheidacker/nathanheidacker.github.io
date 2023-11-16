@@ -1,6 +1,0 @@
-alphagradient.Asset.quote
-=========================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Asset.quote

@@ -1,6 +1,0 @@
-alphagradient.Put.reset
-=======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Put.reset

@@ -1,6 +1,0 @@
-alphagradient.Stock.rfr
-=======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Stock.rfr

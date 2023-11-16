@@ -1,6 +1,0 @@
-alphagradient.Put.base
-======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.base

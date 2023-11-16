@@ -1,6 +1,0 @@
-alphagradient.Environment.autosync
-==================================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Environment.autosync

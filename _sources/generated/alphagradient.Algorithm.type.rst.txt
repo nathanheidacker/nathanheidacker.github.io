@@ -1,6 +1,0 @@
-alphagradient.Algorithm.type
-============================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: Algorithm.type

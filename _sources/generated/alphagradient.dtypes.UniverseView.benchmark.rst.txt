@@ -1,6 +1,0 @@
-alphagradient.dtypes.UniverseView.benchmark
-===========================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autoproperty:: UniverseView.benchmark

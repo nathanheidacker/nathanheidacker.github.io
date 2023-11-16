@@ -1,6 +1,0 @@
-alphagradient.Put.optional
-==========================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Put.optional

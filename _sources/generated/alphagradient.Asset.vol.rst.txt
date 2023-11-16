@@ -1,6 +1,0 @@
-alphagradient.Asset.vol
-=======================
-
-.. currentmodule:: alphagradient
-
-.. automethod:: Asset.vol

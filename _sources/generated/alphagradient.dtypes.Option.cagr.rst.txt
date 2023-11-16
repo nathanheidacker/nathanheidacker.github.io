@@ -1,6 +1,0 @@
-alphagradient.dtypes.Option.cagr
-================================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. automethod:: Option.cagr

@@ -1,6 +1,0 @@
-alphagradient.algolib.TemplateAlgo.end
-======================================
-
-.. currentmodule:: alphagradient.algolib
-
-.. autoproperty:: TemplateAlgo.end

@@ -1,6 +1,0 @@
-alphagradient.Call.next
-=======================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Call.next

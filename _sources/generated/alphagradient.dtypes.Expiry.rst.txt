@@ -1,6 +1,0 @@
-﻿alphagradient.dtypes.Expiry
-===========================
-
-.. currentmodule:: alphagradient.dtypes
-
-.. autodata:: Expiry

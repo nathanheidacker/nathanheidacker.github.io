@@ -1,6 +1,0 @@
-alphagradient.Asset.open\_value
-===============================
-
-.. currentmodule:: alphagradient
-
-.. autoproperty:: Asset.open_value

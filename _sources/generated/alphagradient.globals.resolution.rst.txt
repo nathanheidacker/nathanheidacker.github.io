@@ -1,6 +1,0 @@
-﻿alphagradient.globals.resolution
-================================
-
-.. currentmodule:: alphagradient
-
-.. autoattribute:: globals.resolution
