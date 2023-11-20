@@ -22,7 +22,7 @@ export default function Home() {
         <div className="h-screen w-screen relative overflow-hidden">
             <GridBackground></GridBackground>
             <h1 className="text-2xl md:text-4xl tracking-tighter">
-                <span>Hi, I'm </span>
+                <span>Hi, I&apos;m </span>
                 <GlitchText
                     className="glitchRotation font-bold text-3xl md:text-5xl"
                     texts={[
