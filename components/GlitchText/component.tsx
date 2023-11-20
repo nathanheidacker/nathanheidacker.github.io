@@ -1,14 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-interface Char {
-    from: string;
-    to: string;
-    start: number;
-    end: number;
-    char?: string;
-}
-
 const chars = "!<>-_\\/[]{}░▒▓—åß∂ƒ© ̇∆ ̊æ≈ç√∫=+*^?#________λ$";
 
 function randomizeCharacter(char: string, proportion: number) {
@@ -37,7 +29,7 @@ const GlitchText: React.FC<{ texts: string[]; className?: string }> = ({
 
     let time = Date.now();
     const iters = 80;
-    const iterTime = 20;
+    const iterTime = 30;
     const totalIterTime = iters * iterTime;
 
     useEffect(() => {

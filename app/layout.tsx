@@ -3,8 +3,8 @@ import { Inter, M_PLUS_1, M_PLUS_1_Code } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-const m1 = M_PLUS_1({ subsets: ["latin"] });
-const m1_code = M_PLUS_1_Code({ subsets: ["latin"] });
+//const m1 = M_PLUS_1({ subsets: ["latin"] });
+//const m1_code = M_PLUS_1_Code({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Nathan's Portfolio",
