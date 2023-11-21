@@ -1,4 +1,5 @@
 import GlitchText from "@/components/GlitchText/component";
+import Diamond from "@/components/Diamond/component";
 
 function range(x: number) {
     return Array(x)
@@ -20,35 +21,39 @@ export default function Home() {
     return (
         <>
             <GridBackground></GridBackground>
+            <Diamond className="h-screen w-screen overflow-hidden fixed -z-40 ml-20"></Diamond>
             <div
                 id="hero"
-                className="h-screen text-center flex justify-center md:text-left md:justify-start md:ml-20"
+                className="h-screen text-left flex flex-col place-items-start justify-start ml-8 md:ml-28"
             >
+                <div className="flex-1 max-h-28 md:max-h-full"></div>
                 <h1
                     id="h1"
-                    className="font-bold self-center text-3xl md:text-6xl tracking-tighter"
+                    className="font-bold flex-1 text-3xl md:text-6xl tracking-tighter"
                 >
                     <span>
-                        Hi. I&apos;m{" "}
-                        <span className="glitchRotation">Nathan</span>,<br />
+                        Hi. I&apos;m <span className="redGradient">Nathan</span>
+                        ,<br />
                         and I&apos;m a
                         <GlitchText
                             className="font-bold"
-                            texts={["", "", "", "n", " "]}
+                            texts={["", "n", " ", "", "lways", " "]}
                         ></GlitchText>
                         <br />
                     </span>
                     <GlitchText
-                        className="glitchRotation font-bold"
+                        className="redGradient font-bold"
                         texts={[
                             "machine learning engineer",
+                            "algorithmic trader",
                             "web developer",
                             "digital artist",
-                            "algorithmic trader",
-                            "berkserk enthusiast",
+                            "learning",
+                            "ベルセルク enthusiast",
                         ]}
                     ></GlitchText>
                 </h1>
+                <div className="flex-1"></div>
             </div>
         </>
     );

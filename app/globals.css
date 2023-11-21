@@ -35,7 +35,7 @@ body {
   overflow-x: hidden;
 }
 
-.glitchRotation {
+.redGradient {
   background: #FF7700;
   background: linear-gradient(to right, #FF7700 0%, #FF0000 100%);
   -webkit-background-clip: text;

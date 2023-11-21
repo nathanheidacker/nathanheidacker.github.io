@@ -56,7 +56,7 @@ const GlitchText: React.FC<{ texts: string[]; className?: string }> = ({
     useEffect(() => {
         const interval = setInterval(() => {
             setTextIndex((index) => (index + 1) % texts.length);
-        }, 3000);
+        }, 5000);
         return () => {
             clearInterval(interval);
         };
