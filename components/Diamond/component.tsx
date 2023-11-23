@@ -79,7 +79,7 @@ const diamondShader = new ShaderPass({
 
     vec3 environment(vec3 dir)
     {
-        return texture(iChannel0,vec2(dir.x,dir.y)).xyz * 1.1;
+        return texture(iChannel0,vec2((dir.x + 0.7 + (0.8 * cos(iTime / 10.0))) / 2.0, (dir.y + 0.9 + (0.8 * sin(iTime / 10.0))) / 2.0)).xyz;
     }
 
 
@@ -189,11 +189,12 @@ function Diamond({ className }: { className?: string }) {
         if (container.current) {
             const loader = new THREE.TextureLoader();
             const texture = loader.load("./test.png");
-            const elem = container.current;
+            let width = container.current.clientWidth;
+            let height = container.current.clientHeight;
             const renderer = new THREE.WebGLRenderer();
             const composer = new EffectComposer(renderer);
             const clock = new THREE.Clock();
-            renderer.setSize(elem.clientWidth, elem.clientHeight);
+            renderer.setSize(width, height);
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             composer.addPass(diamondShader);
 
@@ -202,15 +203,13 @@ function Diamond({ className }: { className?: string }) {
 
             const animate = () => {
                 diamondShader.uniforms.iTime.value = clock.getElapsedTime();
-                diamondShader.uniforms.iResolution.value.set(
-                    elem.clientWidth,
-                    elem.clientHeight
-                );
+                diamondShader.uniforms.iResolution.value.set(width, height);
+                renderer.setSize(width, height);
                 composer.render();
             };
 
             renderer.setAnimationLoop(animate);
-            elem.appendChild(renderer.domElement);
+            container.current.appendChild(renderer.domElement);
         }
     }, []);
 
