@@ -21,15 +21,15 @@ export default function Home() {
     return (
         <>
             <GridBackground></GridBackground>
-            <Diamond className="h-screen w-screen overflow-hidden fixed -z-40 ml-20"></Diamond>
+            <Diamond className="h-screen w-screen overflow-hidden fixed -z-40"></Diamond>
             <div
                 id="hero"
-                className="h-screen text-left flex flex-col place-items-start justify-start ml-8 md:ml-28"
+                className="h-screen text-left flex flex-col place-items-start justify-start ml-8 sm:ml-16 md:ml-28"
             >
-                <div className="flex-1 max-h-28 md:max-h-full"></div>
+                <div className="flex-1 max-h-40 sm:max-h-60 md:max-h-full"></div>
                 <h1
                     id="h1"
-                    className="font-bold flex-1 text-3xl md:text-6xl tracking-tighter"
+                    className="font-bold flex-1 text-4xl sm:text-5xl md:text-6xl tracking-tighter"
                 >
                     <span>
                         Hi. I&apos;m <span className="redGradient">Nathan</span>
@@ -44,7 +44,7 @@ export default function Home() {
                     <GlitchText
                         className="redGradient font-bold"
                         texts={[
-                            "machine learning engineer",
+                            "machine learning",
                             "algorithmic trader",
                             "web developer",
                             "digital artist",
@@ -52,9 +52,15 @@ export default function Home() {
                             "ベルセルク enthusiast",
                         ]}
                     ></GlitchText>
+                    <br />
+                    <GlitchText
+                        className="redGradient font-bold"
+                        texts={["engineer", "    ", "", "", "", ""]}
+                    ></GlitchText>
                 </h1>
                 <div className="flex-1"></div>
             </div>
+            <div className="h-screen"></div>
         </>
     );
 }

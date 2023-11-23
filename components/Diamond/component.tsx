@@ -10,6 +10,7 @@ const diamondShader = new ShaderPass({
         iTime: { value: 0.0 },
         iResolution: { value: new THREE.Vector2(5000, 5000) },
         iChannel0: { value: new THREE.Texture() },
+        iScroll: { value: new THREE.Vector2(0, 0) },
     },
     vertexShader: /* glsl */ `
     varying vec2 vUv;
@@ -20,9 +21,14 @@ const diamondShader = new ShaderPass({
     }`,
     fragmentShader: /* glsl */ `
 
+    precision highp float;
+
     uniform float iTime;
     uniform vec2 iResolution;
     uniform sampler2D iChannel0;
+    uniform vec2 iScroll;
+
+    varying vec2 vUv;
 
     void intersect_plane(vec3 dir,vec3 pos,vec3 planenormal,float planeoffset,inout float near,inout float far,inout vec3 nearnormal,inout vec3 farnormal)
     {
@@ -79,7 +85,9 @@ const diamondShader = new ShaderPass({
 
     vec3 environment(vec3 dir)
     {
-        return texture(iChannel0,vec2((dir.x + 0.7 + (0.8 * cos(iTime / 10.0))) / 2.0, (dir.y + 0.9 + (0.8 * sin(iTime / 10.0))) / 2.0)).xyz;
+        vec3 col = texture(iChannel0,vec2((dir.x + 0.7 + (0.8 * cos(iTime / 10.0))) / 2.0, (dir.y + 0.9 + (0.8 * sin(iTime / 10.0))) / 2.0)).xyz;
+        col += vec3(0.01, 0.01, 0.02);
+        return col;
     }
 
 
@@ -137,7 +145,7 @@ const diamondShader = new ShaderPass({
     void main()
     {
         vec2 position=(2.0*gl_FragCoord.xy-iResolution.xy)/max(iResolution.x, iResolution.y);
-        vec3 pos=vec3(0.0,0.0,-3.0);
+        vec3 pos=vec3(-0.5,-iScroll.y / 500.0,-3.0);
     //	vec3 dir=normalize(vec3(position,1.0-sqrt(position.x*position.x+position.y*position.y)));
         vec3 dir=normalize(vec3(position,1.0));
 
@@ -189,22 +197,38 @@ function Diamond({ className }: { className?: string }) {
         if (container.current) {
             const loader = new THREE.TextureLoader();
             const texture = loader.load("./test.png");
-            let width = container.current.clientWidth;
-            let height = container.current.clientHeight;
+            const elem = container.current;
             const renderer = new THREE.WebGLRenderer();
             const composer = new EffectComposer(renderer);
             const clock = new THREE.Clock();
-            renderer.setSize(width, height);
+            renderer.setSize(elem.clientWidth, elem.clientHeight);
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             composer.addPass(diamondShader);
 
             texture.minFilter = THREE.LinearFilter;
             diamondShader.uniforms.iChannel0.value = texture;
+            diamondShader.uniforms.iResolution.value.set(
+                elem.clientWidth,
+                elem.clientHeight
+            );
+
+            window.addEventListener("resize", () => {
+                diamondShader.uniforms.iResolution.value.set(
+                    elem.clientWidth,
+                    elem.clientHeight
+                );
+                renderer.setSize(elem.clientWidth, elem.clientHeight);
+            });
+
+            window.addEventListener("scroll", () => {
+                diamondShader.uniforms.iScroll.value.set(
+                    window.scrollX,
+                    window.scrollY
+                );
+            });
 
             const animate = () => {
                 diamondShader.uniforms.iTime.value = clock.getElapsedTime();
-                diamondShader.uniforms.iResolution.value.set(width, height);
-                renderer.setSize(width, height);
                 composer.render();
             };
 
