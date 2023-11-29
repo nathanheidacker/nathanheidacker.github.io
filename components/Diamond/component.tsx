@@ -145,7 +145,7 @@ const diamondShader = new ShaderPass({
     void main()
     {
         vec2 position=(2.0*gl_FragCoord.xy-iResolution.xy)/max(iResolution.x, iResolution.y);
-        vec3 pos=vec3(-0.5,-iScroll.y / 500.0,-3.0);
+        vec3 pos=vec3(-0.3,-iScroll.y / 500.0,-3.0);
     //	vec3 dir=normalize(vec3(position,1.0-sqrt(position.x*position.x+position.y*position.y)));
         vec3 dir=normalize(vec3(position,1.0));
 

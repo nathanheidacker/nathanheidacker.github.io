@@ -31,10 +31,6 @@ body {
   width: 10vh;
 }
 
-.wrapper {
-  overflow-x: hidden;
-}
-
 .redGradient {
   background: #FF7700;
   background: linear-gradient(to right, #FF7700 0%, #FF0000 100%);
@@ -42,6 +38,19 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-#h1 {
-  line-height: 150%;
+.fillEmpty:empty:before {
+  content: "\200b";
+}
+
+.diamond {
+  width: inherit;
+}
+
+.hero {
+  width: 80%;
+  margin: auto;
+}
+
+#heroText {
+  line-height: 140%;
 }
