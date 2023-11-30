@@ -6,7 +6,7 @@ import { ShaderPass, EffectComposer } from "three/examples/jsm/Addons.js";
 const gridShader = new ShaderPass({
     name: "gridShader",
     uniforms: {
-        iResolution: { value: new THREE.Vector2(800, 800) },
+        iResolution: { value: new THREE.Vector3(800, 800, 1) },
         iScroll: { value: new THREE.Vector2(0, 0) },
     },
     vertexShader: /* glsl */ `
@@ -24,15 +24,15 @@ const gridShader = new ShaderPass({
     #define BORDER_THICKNESS 0.015
     #define BORDER_COLOR 0.1
     #define BG_COLOR 0.05
-    #define DISTORTION 0.7
+    #define DISTORTION 1.2
 
-    uniform vec2 iResolution;
+    uniform vec3 iResolution;
     uniform vec2 iScroll;
 
     void main()
     {   
         float ratio = iResolution.x / iResolution.y;
-        vec2 frag = (gl_FragCoord.xy / iResolution.xy) - 1.0;
+        vec2 frag = (gl_FragCoord.xy / (iResolution.xy * iResolution.z)) - 0.5;
         frag.x *= ratio;
         vec3 direction = normalize (vec3 (frag, 2.0 - DISTORTION));
 
@@ -72,6 +72,7 @@ function GridBackground({ className }: { className?: string }) {
             const renderer = new THREE.WebGLRenderer();
             renderer.setSize(elem.clientWidth, elem.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
+            gridShader.uniforms.iResolution.value.z = window.devicePixelRatio;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
             const composer = new EffectComposer(renderer);
