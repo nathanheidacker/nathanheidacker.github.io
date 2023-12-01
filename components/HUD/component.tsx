@@ -30,7 +30,8 @@ function PageCount({ className }: { className?: string }) {
 
     return (
         <div className={className}>
-            // y{leadingZeroes(scroll, 4)}{" "}
+            {"//y"}
+            {leadingZeroes(scroll, 4)}{" "}
             {`<${leadingZeroes(page, 2)}/${leadingZeroes(pages, 2)}>`}
         </div>
     );
@@ -49,26 +50,31 @@ function Timer({ className }: { className?: string }) {
 }
 
 function VideoStats({ className }: { className?: string }) {
-    const [start, _] = useState<number>(Date.now());
-    const [time, setTime] = useState<number>(0);
-    const [frames, setFrames] = useState<number>(0);
+    const [times, setTimes] = useState<number[]>([]);
+    const [fps, setFps] = useState<number>(0);
     const [stats, setStats] = useState<string>("");
+
+    function refreshLoop() {
+        window.requestAnimationFrame(() => {
+            const now = performance.now();
+            while (times.length > 0 && times[0] <= now - 1000) {
+                times.shift();
+            }
+            times.push(now);
+            setFps(times.length);
+            refreshLoop();
+        });
+    }
 
     useEffect(() => {
         setStats(`${window.innerWidth}x${window.innerHeight}`);
-
-        const update = () => {
-            setFrames((i) => i + 1);
-            setTime((Date.now() - start) / 1000);
-            requestAnimationFrame(update);
-        };
-
-        update();
+        refreshLoop();
     }, []);
+
     return (
         <div className={className}>
-            {stats} {leadingZeroes(Math.floor(frames / time), 3)}{" "}
-            {Math.floor((time * 1000) / frames)}ms
+            {stats} {leadingZeroes(fps, 3)}{" "}
+            {leadingZeroes(Math.floor(1000 / fps), 3)}ms
         </div>
     );
 }
