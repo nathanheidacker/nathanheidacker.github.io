@@ -8,6 +8,7 @@ const gridShader = new ShaderPass({
     uniforms: {
         iResolution: { value: new THREE.Vector3(800, 800, 1) },
         iScroll: { value: new THREE.Vector2(0, 0) },
+        iColors: { value: new THREE.Vector2(0.1, 0.05) },
     },
     vertexShader: /* glsl */ `
     varying vec2 vUv;
@@ -22,12 +23,11 @@ const gridShader = new ShaderPass({
 
     #define DENSITY 6.0
     #define BORDER_THICKNESS 0.015
-    #define BORDER_COLOR 0.1
-    #define BG_COLOR 0.05
     #define DISTORTION 1.2
 
     uniform vec3 iResolution;
     uniform vec2 iScroll;
+    uniform vec2 iColors;
 
     void main()
     {   
@@ -55,15 +55,29 @@ const gridShader = new ShaderPass({
         float yBorder = fract(direction.y * curveModifier) > BORDER_THICKNESS ? 0.0 : 1.0;
         float crossBorder = fract((direction.x + direction.y) * curveModifier) > BORDER_THICKNESS ? 0.0 : 1.0;
 
-        float border = min(yBorder + xBorder + crossBorder, 1.0) * BORDER_COLOR;
-        float color = max(border, BG_COLOR);
+        float border = min(yBorder + xBorder + crossBorder, 1.0);
+        float color = border > 0.0 ? iColors.x : iColors.y;
 
         gl_FragColor = vec4(vec3(color), 1.0);
     }`,
 });
 
-function GridBackground({ className }: { className?: string }) {
+function GridBackground({
+    className,
+    mode,
+}: {
+    className?: string;
+    mode: "light" | "dark";
+}) {
     const container = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (mode == "light") {
+            gridShader.uniforms.iColors.value.set(0.9, 1.0);
+        } else {
+            gridShader.uniforms.iColors.value.set(0.1, 0.05);
+        }
+    }, [mode]);
 
     useEffect(() => {
         if (container.current) {

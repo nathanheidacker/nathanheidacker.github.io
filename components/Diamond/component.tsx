@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { ShaderPass, EffectComposer } from "three/examples/jsm/Addons.js";
-import html2canvas from "html2canvas";
 
 const diamondShader = new ShaderPass({
     name: "DiamondShader",
@@ -187,16 +186,10 @@ diamondShader.renderToScreen = true;
 function Diamond({ className }: { className?: string }) {
     const container = useRef<HTMLDivElement>(null);
 
-    const updateTexture = () => {
-        html2canvas(document.body).then(function (canvas) {
-            diamondShader.uniforms.iChannel0.value.image = canvas;
-        });
-    };
-
     useEffect(() => {
         if (container.current) {
             const loader = new THREE.TextureLoader();
-            const texture = loader.load("./test.png");
+            const texture = loader.load("./dark.png");
             const elem = container.current;
             const renderer = new THREE.WebGLRenderer();
             const composer = new EffectComposer(renderer);

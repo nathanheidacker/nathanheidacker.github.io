@@ -1,7 +1,5 @@
 import GlitchText from "@/components/GlitchText/component";
 import Diamond from "@/components/Diamond/component";
-import ProjectPanel from "@/components/ProjectPanel/component";
-import PROJECTS from "@/components/ProjectPanel/projects";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     IconDefinition,
@@ -9,7 +7,6 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import GridBackground from "@/components/GridBackground/component";
-import HUD from "@/components/HUD/component";
 
 function range(x: number) {
     return Array(x)
@@ -20,7 +17,7 @@ function range(x: number) {
 function SocialIcon({ icon, href }: { icon: IconDefinition; href?: string }) {
     return (
         <a href={href}>
-            <button className="w-24 h-24 p-8 sm:w-32 sm:h-32 sm:p-12 2xl:w-40 2xl:h-40 2xl:p-14 -mx-2 border rounded-full font-thin">
+            <button className="w-24 h-24 p-8 sm:w-32 sm:h-32 sm:p-12 2xl:w-40 2xl:h-40 2xl:p-14 -mx-2 border text-neutral-900 border-neutral-900 rounded-full font-thin">
                 <FontAwesomeIcon icon={icon} className=""></FontAwesomeIcon>
             </button>
         </a>
@@ -89,7 +86,7 @@ function Hero() {
             </div>
             <HeroText
                 id="heroText"
-                className="text-neutral-100 font-bold text-3xl md:text-4xl xl:text-5xl tracking-tighter mb-24"
+                className="text-neutral-900 font-bold text-4xl md:text-5xl xl:text-6xl tracking-tighter mb-24"
             ></HeroText>
             <Socials className="flex items-center"></Socials>
         </div>
@@ -100,28 +97,22 @@ function Divider() {
     return <div className="h-80"></div>;
 }
 
-function AboutMe() {
-    return (
-        <div className="flex flex-col place-content-center h-screen max-w-[2500px] w-4/5 m-auto">
-            <div className="text-neutral-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
-                More About Me
-            </div>
-        </div>
-    );
-}
-
 export default function Home() {
     return (
         <>
-            <HUD className="-z-30"></HUD>
             <GridBackground
-                mode="dark"
                 className="fixed h-screen w-screen -z-50"
+                mode="light"
             ></GridBackground>
             <div id="HOME_CONTENT">
                 <Hero></Hero>
                 <Divider></Divider>
-                <AboutMe></AboutMe>
+                <div className="h-screen">
+                    <div className="h-24"></div>
+                    <div className="text-neutral-900 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter">
+                        More About Me
+                    </div>
+                </div>
             </div>
         </>
     );
