@@ -87,9 +87,68 @@ body {
 }
 
 .hudFont {
+  margin: 0.5rem;
   font-stretch: 100%;
   font-size: 10px;
   font-weight: 450;
   text-transform: uppercase;
   color: rgba(var(--hud-font));
+}
+
+@media (min-width: 760px) {
+  .hud {
+    width: 90%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0);
+  
+    --s: 50px; /* the size on the corner */
+    --t: 2.5px;  /* the thickness of the border */
+    --g: 0px; /* the gap between the border and image */
+    
+    padding: calc(var(--g) + var(--t));
+    outline: var(--t) solid rgba(var(--hud-font)); /* the color here */
+    outline-offset: calc(-1*var(--t));
+    -webkit-mask:
+      conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+      0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+      linear-gradient(#000 0 0) content-box;
+  }
+  
+  .hudFont {
+    margin: 1rem;
+    font-stretch: 100%;
+    font-size: 13px;
+    font-weight: 450;
+    text-transform: uppercase;
+    color: rgba(var(--hud-font));
+  }
+}
+
+@media (min-width: 1024px) {
+  .hud {
+    width: 90%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0);
+  
+    --s: 60px; /* the size on the corner */
+    --t: 3px;  /* the thickness of the border */
+    --g: 0px; /* the gap between the border and image */
+    
+    padding: calc(var(--g) + var(--t));
+    outline: var(--t) solid rgba(var(--hud-font)); /* the color here */
+    outline-offset: calc(-1*var(--t));
+    -webkit-mask:
+      conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+      0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+      linear-gradient(#000 0 0) content-box;
+  }
+  
+  .hudFont {
+    margin: 1.5rem;
+    font-stretch: 100%;
+    font-size: 16px;
+    font-weight: 450;
+    text-transform: uppercase;
+    color: rgba(var(--hud-font));
+  }
 }

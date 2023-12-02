@@ -86,11 +86,11 @@ function HUD({ className }: { className?: string }) {
                 className + " fixed flex h-full w-full place-content-center"
             }
         >
-            <div className="hud hudFont self-center grid grid-cols-2 gap-4 place-content-between">
-                <PageCount className="m-2"></PageCount>
-                <Timer className="m-2 place-self-end text-right whitespace-nowrap"></Timer>
-                <div className=""></div>
-                <VideoStats className="m-2 place-self-end text-right"></VideoStats>
+            <div className="hud self-center grid grid-cols-2 gap-4 place-content-between">
+                <PageCount className="hudFont"></PageCount>
+                <Timer className="hudFont place-self-end text-right whitespace-nowrap"></Timer>
+                <div className="hudFont"></div>
+                <VideoStats className="hudFont place-self-end text-right"></VideoStats>
             </div>
         </div>
     );
