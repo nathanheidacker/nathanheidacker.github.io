@@ -136,8 +136,7 @@ const diamondShader = new ShaderPass({
             dir=reflecteddir;
             fraction*=reflectedfraction;
         }
-    //	vec3 refractedlight=environment(refracteddir)*(1.0-reflectedfraction);
-
+    	//vec3 refractedlight=environment(refracteddir)*(1.0-reflectedfraction);
         return light;
     }
 

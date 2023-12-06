@@ -10,12 +10,7 @@ import {
 import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import GridBackground from "@/components/GridBackground/component";
 import HUD from "@/components/HUD/component";
-
-function range(x: number) {
-    return Array(x)
-        .fill(0)
-        .map((_, j) => j);
-}
+import ProjectCarousel from "@/components/ProjectCarousel/component";
 
 function SocialIcon({ icon, href }: { icon: IconDefinition; href?: string }) {
     return (
@@ -103,9 +98,10 @@ function Divider() {
 function AboutMe() {
     return (
         <div className="flex flex-col place-content-center h-screen max-w-[2500px] w-4/5 m-auto">
-            <div className="text-neutral-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
+            <div className="text-neutral-100 mb-12 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
                 More About Me
             </div>
+            <ProjectPanel active={true} project={PROJECTS[0]}></ProjectPanel>
         </div>
     );
 }

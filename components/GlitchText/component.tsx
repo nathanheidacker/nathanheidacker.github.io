@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-const chars = "!<>-_\\/[]{}░▒▓—åß∂ƒ© ̇∆ ̊æ≈ç√∫=+*^?#________λ$";
+const chars = "!<>-_\\/[]{}—åß∂ƒ©░▒▓∆æ≈ç√∫=+*^?#________λ$";
 
 function randomizeCharacter(char: string, proportion: number) {
     if (Math.random() > proportion) {
