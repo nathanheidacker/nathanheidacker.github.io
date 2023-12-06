@@ -10,8 +10,12 @@ function ProjectCarousel({ projects }: { projects: ProjectPanelArgs[] }) {
 
     return (
         <div className="projectCarousel w-full flex overflow-x-auto">
-            {projects.map((project) => (
-                <ProjectPanel project={project} active={true}></ProjectPanel>
+            {projects.map((project, key) => (
+                <ProjectPanel
+                    key={key}
+                    project={project}
+                    active={true}
+                ></ProjectPanel>
             ))}
         </div>
     );

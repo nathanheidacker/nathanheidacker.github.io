@@ -52,9 +52,10 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                 ></GlitchText>
                 <br />
                 <div className="flex flex-col place-content-around">
-                    {description.map((p, i) => {
+                    {description.map((p, key) => {
                         return (
                             <GlitchText
+                                key={key}
                                 className="mb-4"
                                 delay={delay}
                                 text={p}
@@ -71,9 +72,9 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                         text={"// EXPLORE_PROJECT"}
                     ></GlitchText>
                     <div>
-                        {(buttons || []).map((button) => {
+                        {(buttons || []).map((button, key) => {
                             return (
-                                <>
+                                <span key={key}>
                                     <GlitchText
                                         className={
                                             "text-neutral-500 text-xl font-bold inline"
@@ -85,7 +86,7 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                                         button={button}
                                     ></ProjectPanelButton>
                                     <br />
-                                </>
+                                </span>
                             );
                         })}
                     </div>
