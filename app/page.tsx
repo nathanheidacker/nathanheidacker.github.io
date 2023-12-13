@@ -98,7 +98,7 @@ function Divider() {
 function AboutMe() {
     return (
         <div className="flex flex-col place-content-center h-screen max-w-[2500px] w-4/5 m-auto">
-            <div className="text-neutral-100 mb-12 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
+            <div className="text-neutral-100 mb-6 md:mb-12 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
                 More About Me
             </div>
             <ProjectPanel active={true} project={PROJECTS[0]}></ProjectPanel>

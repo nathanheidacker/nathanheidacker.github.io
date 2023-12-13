@@ -17,8 +17,8 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
     const { title, flavor, description, buttons } = project;
     const delay = 0;
     return (
-        <div className="projectPanelInfo w-full bg-black opacity-70 tracking-wide flex flex-col place-content-around p-12">
-            <div>
+        <div className="projectPanelInfo w-full bg-black opacity-70 tracking-wide flex flex-col">
+            <div className="mb-6">
                 <GlitchText
                     className={"text-neutral-500"}
                     delay={delay}
@@ -31,7 +31,7 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                     text={title}
                 ></GlitchText>
             </div>
-            <div>
+            <div className="mb-6">
                 <GlitchText
                     className={"text-neutral-500"}
                     delay={delay}
@@ -44,7 +44,7 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                     text={flavor}
                 ></GlitchText>
             </div>
-            <div>
+            <div className="mb-6">
                 <GlitchText
                     className={"text-neutral-500"}
                     delay={delay}
@@ -68,25 +68,19 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                 <div>
                     <GlitchText
                         className={"text-neutral-500"}
-                        delay={delay + 900}
+                        delay={delay}
                         text={"// EXPLORE_PROJECT"}
                     ></GlitchText>
                     <div>
                         {(buttons || []).map((button, key) => {
                             return (
-                                <span key={key}>
-                                    <GlitchText
-                                        className={
-                                            "text-neutral-500 text-xl font-bold inline"
-                                        }
-                                        text={"//"}
-                                    ></GlitchText>
-                                    <span> </span>
+                                <>
                                     <ProjectPanelButton
+                                        key={key}
                                         button={button}
                                     ></ProjectPanelButton>
                                     <br />
-                                </span>
+                                </>
                             );
                         })}
                     </div>

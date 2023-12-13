@@ -83,7 +83,8 @@ function HUD({ className }: { className?: string }) {
     return (
         <div
             className={
-                className + " fixed flex h-full w-full place-content-center"
+                className +
+                " fixed flex h-full w-full place-content-center z-50 pointer-events-none"
             }
         >
             <div className="hud self-center grid grid-cols-2 gap-4 place-content-between">
