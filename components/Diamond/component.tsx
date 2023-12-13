@@ -231,7 +231,7 @@ function Diamond({ className }: { className?: string }) {
             const animate = () => {
                 console.log(getFPS());
                 diamondShader.uniforms.iTime.value = clock.getElapsedTime();
-                if (getFPS() < 60) {
+                if (getFPS() < 59) {
                     // Push it farther away to increase fps
                     diamondShader.uniforms.iDist.value *= 1.001;
                 }
