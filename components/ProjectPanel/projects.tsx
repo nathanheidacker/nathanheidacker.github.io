@@ -10,7 +10,10 @@ const PROJECTS = [
         startDate: "November 2021",
         endDate: "July 2022",
         image: "./temple.jpg",
-        buttons: [{ text: "// DOCS" }, { text: "// WEBSITE" }],
+        buttons: [
+            { text: "// DOCS", href: "http://www.google.com" },
+            { text: "// WEBSITE", href: "http://www.google.com" },
+        ],
     },
     {
         title: "heidacker.ai",
