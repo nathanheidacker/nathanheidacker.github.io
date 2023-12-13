@@ -1,23 +1,23 @@
 import Image from "next/image";
 import GlitchText from "../GlitchText/alternate";
 import ProjectPanelButton, { ProjectPanelButtonArgs } from "./button";
-
-interface ProjectPanelArgs {
-    title: string;
-    flavor: string;
-    description: string[];
-    startDate: string;
-    endDate: string;
-    image: string;
-    buttons?: ProjectPanelButtonArgs[];
-    titleOverlay?: boolean;
-}
+import { ProjectPanelArgs } from "./projects";
 
 function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
-    const { title, flavor, description, buttons } = project;
+    const {
+        title,
+        flavor,
+        description,
+        buttons,
+        startDate,
+        endDate,
+        projectStatus,
+    } = project;
     const delay = 0;
+    const periodTitle =
+        projectStatus == "ACTIVE" ? "START_DATE" : "DEVELOPMENT_PERIOD";
     return (
-        <div className="projectPanelInfo w-full bg-black opacity-70 tracking-wide flex flex-col">
+        <div className="projectPanelInfo w-full bg-black opacity-70 tracking-wide flex flex-col my-auto">
             <div className="mb-6">
                 <GlitchText
                     className={"text-neutral-500"}
@@ -29,6 +29,34 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                     className={"mb-4"}
                     delay={delay}
                     text={title}
+                ></GlitchText>
+            </div>
+            <div className="mb-6">
+                <GlitchText
+                    className={"text-neutral-500"}
+                    delay={delay}
+                    text={"// DEVELOPMENT_STATUS"}
+                ></GlitchText>
+                <br />
+                <GlitchText
+                    className={`${
+                        projectStatus == "ACTIVE" ? "redGradient font-bold" : ""
+                    } mb-4`}
+                    delay={delay}
+                    text={projectStatus}
+                ></GlitchText>
+            </div>
+            <div className="mb-6">
+                <GlitchText
+                    className={"text-neutral-500"}
+                    delay={delay}
+                    text={`// ${periodTitle}`}
+                ></GlitchText>
+                <br />
+                <GlitchText
+                    className={"mb-4"}
+                    delay={delay}
+                    text={endDate ? `${startDate} - ${endDate}` : startDate}
                 ></GlitchText>
             </div>
             <div className="mb-6">
@@ -92,6 +120,39 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
     );
 }
 
+function ProjectPanelHero({ project }: { project: ProjectPanelArgs }) {
+    const { title, flavor, image, titleOverlay } = project;
+    const useTitleOverlay = titleOverlay !== undefined ? titleOverlay : true;
+    return (
+        <div className="relative overflow-hidden projectPanelHero">
+            <div className="absolute flex w-full h-full">
+                {useTitleOverlay ? (
+                    <div className="z-10 min-w-full font-bold place-self-center projectPanelTitle">
+                        {title}
+                    </div>
+                ) : (
+                    <></>
+                )}
+            </div>
+            <Image
+                className="opacity-50 grayscale"
+                src={image}
+                alt={flavor}
+                width={4096}
+                height={4096}
+            ></Image>
+        </div>
+    );
+}
+
+function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
+    return (
+        <div className="w-full">
+            <ProjectPanelHero project={project}></ProjectPanelHero>
+        </div>
+    );
+}
+
 function ProjectPanel({
     className,
     active,
@@ -101,28 +162,9 @@ function ProjectPanel({
     active: boolean;
     project: ProjectPanelArgs;
 }) {
-    const { title, flavor, image, titleOverlay } = project;
-    const useTitleOverlay = titleOverlay !== undefined ? titleOverlay : true;
     return (
         <div className={`${className} text-neutral-100 projectPanel`}>
-            <div className="relative overflow-hidden projectPanelHero">
-                <div className="absolute flex w-full h-full">
-                    {useTitleOverlay ? (
-                        <div className="z-10 min-w-full place-self-center projectPanelTitle">
-                            {title}
-                        </div>
-                    ) : (
-                        <></>
-                    )}
-                </div>
-                <Image
-                    className="opacity-50 grayscale"
-                    src={image}
-                    alt={flavor}
-                    width={4096}
-                    height={4096}
-                ></Image>
-            </div>
+            <ProjectPanelNav project={project}></ProjectPanelNav>
             {active ? (
                 <ProjectPanelInfo project={project}></ProjectPanelInfo>
             ) : (

@@ -10,7 +10,7 @@ const diamondShader = new ShaderPass({
         iResolution: { value: new THREE.Vector2(5000, 5000) },
         iChannel0: { value: new THREE.Texture() },
         iScroll: { value: new THREE.Vector2(0, 0) },
-        iDist: { value: -3.0 },
+        iDist: { value: -2.0 },
     },
     vertexShader: /* glsl */ `
     varying vec2 vUv;
@@ -232,7 +232,8 @@ function Diamond({ className }: { className?: string }) {
                 console.log(getFPS());
                 diamondShader.uniforms.iTime.value = clock.getElapsedTime();
                 if (getFPS() < 60) {
-                    diamondShader.uniforms.iDist.value -= 0.01;
+                    // Push it farther away to increase fps
+                    diamondShader.uniforms.iDist.value *= 1.001;
                 }
                 composer.render();
             };

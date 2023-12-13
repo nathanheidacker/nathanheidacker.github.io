@@ -33,7 +33,7 @@ const GlitchText: React.FC<{
     const ghostRef = useRef<HTMLDivElement>(null);
     const displayRef = useRef<HTMLDivElement>(null);
 
-    const glitchEffect = () => {
+    useEffect(() => {
         if (!animating) {
             setAnimating(true);
             setTextIndex(0);
@@ -55,39 +55,31 @@ const GlitchText: React.FC<{
                 },
                 hover ? 0 : _delay
             );
+
+            return () => {
+                clearInterval(updater);
+            };
         }
-    };
-
-    const updateHeight = () => {
-        // This is a bit hacky but because we're setting the height explicitly,
-        // we need to wait for the fonts/styles to load in to get the correct
-        // computed height. Otherwise, things look wonky.
-        const handle = setInterval(() => {
-            if (ghostRef.current && displayRef.current) {
-                displayRef.current.style.minHeight = `${ghostRef.current.clientHeight}px`;
-            }
-        }, 50);
-
-        // Stop updating the heights after one second
-        setTimeout(() => {
-            clearInterval(handle);
-        }, 2000);
-
-        return handle;
-    };
+    }, [text, hover, speed, delay]);
 
     useEffect(() => {
-        glitchEffect();
-        const handle = updateHeight();
+        if (!animating) {
+            const handle = setInterval(() => {
+                if (ghostRef.current && displayRef.current) {
+                    displayRef.current.style.minHeight = `${ghostRef.current.clientHeight}px`;
+                }
+            }, 50);
 
-        return () => {
-            clearInterval(handle);
-        };
+            // Stop updating the heights after one second
+            setTimeout(() => {
+                clearInterval(handle);
+            }, 2000);
+
+            return () => {
+                clearInterval(handle);
+            };
+        }
     }, [text]);
-
-    useEffect(() => {
-        glitchEffect();
-    }, [hover]);
 
     useEffect(() => {
         if (textIndex - trailLength > text.length) {

@@ -1,4 +1,18 @@
-const PROJECTS = [
+import { ProjectPanelButtonArgs } from "./button";
+
+export interface ProjectPanelArgs {
+    title: string;
+    flavor: string;
+    description: string[];
+    projectStatus: string;
+    image: string;
+    startDate: string;
+    endDate?: string;
+    buttons?: ProjectPanelButtonArgs[];
+    titleOverlay?: boolean;
+}
+
+const PROJECTS: ProjectPanelArgs[] = [
     {
         title: "AlphaGradient",
         flavor: "A python library for quickly developing and backtesting financial algorithms",
@@ -7,6 +21,7 @@ const PROJECTS = [
             "Where other libraries might require you to be a programmer first and and a certified quantitative financial analyst second, AlphaGradient is truly geared towards hobbyist algorithmic traders who want to play around with ideas for financial algorithms. Within minutes, you can have a fully backtestable algorithm using nothing but basic python.",
             "AlphaGradient is to the algorithmic trader as console gaming is to the gamer; it gets the job done and comes at a bargain--batteries included. If you have even a passing interest in finance or algorithmic trading, this package makes it as easy as possible to get involved without having a background in computer science.",
         ],
+        projectStatus: "SUSPENDED",
         startDate: "November 2021",
         endDate: "July 2022",
         image: "./temple.jpg",
@@ -29,29 +44,48 @@ const PROJECTS = [
             "At HEIDACKER.AI, we craft interactive 3D showcases that bring AI-driven products to life. Our goal is to seamlessly demonstrate the value and possibilities of these innovations to businesses and individuals alike. Through our work, we aim to transform intricate concepts into engaging digital narratives.",
             "Our approach is rooted in collaboration and skill. We deeply understand your product, design a compelling 3D narrative, and then bring it to life using cutting-edge technology. The result is an intuitive, cross-platform experience that lets your product shine without distractions.",
         ],
+        projectStatus: "ACTIVE",
         startDate: "August 2023",
-        endDate: "Today",
         image: "temple.jpg",
-        buttons: [],
+        buttons: [
+            {
+                text: "// WEBSITE",
+                href: "https://heidacker.ai",
+            },
+        ],
     },
     {
         title: "Yugen",
         flavor: "A 3D digital storefront for Japanese ceramic artists",
-        description: [],
+        description: [
+            "Yugen is a cutting-edge 3D digital storefront designed to showcase the exquisite craftsmanship of Japanese ceramic artists. Yugen is not merely a marketplace; it's a curated gallery where every piece comes to life in stunning three-dimensional detail, allowing patrons to explore the intricate nuances and timeless beauty of each creation.",
+            "At the heart of Yugen lies the groundbreaking Gaussian Splatting rendering technique, a state-of-the-art method that elevates the visualization of ceramic art to unprecedented levels. Unlike conventional rendering techniques, Gaussian Splatting meticulously captures the delicate textures, intricate details, and subtle nuances of each ceramic masterpiece, providing a true-to-life representation that goes beyond the limitations of traditional images. This novel approach ensures that users can authentically experience the artistry and craftsmanship of Japanese ceramics as if they were holding the pieces in their hands.",
+            "Yugen serves as a bridge between art and technology, creating a digital space where the profound beauty of Japanese ceramics is celebrated and accessible worldwide. By incorporating Gaussian Splatting, we redefine the standards of online art appreciation, offering a unique and unparalleled experience for enthusiasts, collectors, and connoisseurs alike.",
+        ],
+        projectStatus: "ACTIVE",
         startDate: "November 2023",
-        endDate: "Today",
         image: "temple.jpg",
-        buttons: [],
+        buttons: [
+            {
+                text: "// WEBSITE",
+                href: "https://www.google.com",
+            },
+        ],
         titleOverlay: false,
     },
     {
-        title: "FaceFinder",
-        flavor: "A AUTOMATIC1111 stable diffusion GUI extension for rating images by facial similarity",
-        description: [],
-        startDate: "May 2023",
-        endDate: "July 2023",
+        title: "Portfolio",
+        flavor: "This portfolio website :)",
+        description: [""],
+        projectStatus: "ACTIVE",
+        startDate: "October 2023",
         image: "temple.jpg",
-        buttons: [],
+        buttons: [
+            {
+                text: "// MY RESUME",
+                href: "https://www.google.com",
+            },
+        ],
     },
 ];
 

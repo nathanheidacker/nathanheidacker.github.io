@@ -10,7 +10,6 @@ import {
 import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import GridBackground from "@/components/GridBackground/component";
 import HUD from "@/components/HUD/component";
-import ProjectCarousel from "@/components/ProjectCarousel/component";
 
 function SocialIcon({ icon, href }: { icon: IconDefinition; href?: string }) {
     return (
@@ -101,7 +100,7 @@ function AboutMe() {
             <div className="text-neutral-100 mb-6 md:mb-12 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
                 My Work
             </div>
-            <ProjectPanel active={true} project={PROJECTS[0]}></ProjectPanel>
+            <ProjectPanel active={true} project={PROJECTS[1]}></ProjectPanel>
         </div>
     );
 }

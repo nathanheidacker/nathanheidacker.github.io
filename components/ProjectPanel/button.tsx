@@ -24,7 +24,7 @@ function ProjectPanelButton({ button }: { button: ProjectPanelButtonArgs }) {
         <a href={button.href}>
             <span ref={buttonRef} className={button.className}>
                 <GlitchText
-                    speed={0.25}
+                    speed={0.5}
                     text={button.text}
                     hover={hover}
                     textClassName="redGradient text-xl font-bold font-bold"
