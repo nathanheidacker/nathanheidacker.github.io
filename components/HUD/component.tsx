@@ -72,7 +72,7 @@ function VideoStats({ className }: { className?: string }) {
     }, []);
 
     return (
-        <div className={className}>
+        <div id="FPSCOUNTER" className={className}>
             {stats} {leadingZeroes(fps, 3)}{" "}
             {leadingZeroes(Math.floor(1000 / fps), 3)}ms
         </div>

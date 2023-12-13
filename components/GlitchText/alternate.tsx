@@ -93,7 +93,6 @@ const GlitchText: React.FC<{
         if (textIndex - trailLength > text.length) {
             clearInterval(updater);
             setAnimating(false);
-            console.log("finished");
         }
     }, [textIndex]);
 

@@ -10,6 +10,7 @@ const diamondShader = new ShaderPass({
         iResolution: { value: new THREE.Vector2(5000, 5000) },
         iChannel0: { value: new THREE.Texture() },
         iScroll: { value: new THREE.Vector2(0, 0) },
+        iDist: { value: -3.0 },
     },
     vertexShader: /* glsl */ `
     varying vec2 vUv;
@@ -26,6 +27,7 @@ const diamondShader = new ShaderPass({
     uniform vec2 iResolution;
     uniform sampler2D iChannel0;
     uniform vec2 iScroll;
+    uniform float iDist;
 
     varying vec2 vUv;
 
@@ -143,7 +145,7 @@ const diamondShader = new ShaderPass({
     void main()
     {
         vec2 position=(2.0*gl_FragCoord.xy-iResolution.xy)/max(iResolution.x, iResolution.y);
-        vec3 pos=vec3(-0.3,-iScroll.y / 500.0,-3.0);
+        vec3 pos=vec3(-0.3,-iScroll.y / 500.0, iDist);
     //	vec3 dir=normalize(vec3(position,1.0-sqrt(position.x*position.x+position.y*position.y)));
         vec3 dir=normalize(vec3(position,1.0));
 
@@ -187,6 +189,13 @@ function Diamond({ className }: { className?: string }) {
 
     useEffect(() => {
         if (container.current) {
+            const fpsCounter = document.querySelector("#FPSCOUNTER");
+            let getFPS = () => 60;
+            if (fpsCounter) {
+                getFPS = () => {
+                    return Number(fpsCounter.innerHTML.split("<!-- -->")[1]);
+                };
+            }
             const loader = new THREE.TextureLoader();
             const texture = loader.load("./dark.png");
             const elem = container.current;
@@ -220,7 +229,11 @@ function Diamond({ className }: { className?: string }) {
             });
 
             const animate = () => {
+                console.log(getFPS());
                 diamondShader.uniforms.iTime.value = clock.getElapsedTime();
+                if (getFPS() < 60) {
+                    diamondShader.uniforms.iDist.value -= 0.01;
+                }
                 composer.render();
             };
 

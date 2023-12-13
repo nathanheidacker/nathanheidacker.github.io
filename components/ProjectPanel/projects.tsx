@@ -11,8 +11,14 @@ const PROJECTS = [
         endDate: "July 2022",
         image: "./temple.jpg",
         buttons: [
-            { text: "// DOCS", href: "http://www.google.com" },
-            { text: "// WEBSITE", href: "http://www.google.com" },
+            {
+                text: "// DOCS",
+                href: "https://nathanheidacker.github.io/alphagradient",
+            },
+            {
+                text: "// CODE",
+                href: "https://github.com/nathanheidacker/alphagradient",
+            },
         ],
     },
     {
