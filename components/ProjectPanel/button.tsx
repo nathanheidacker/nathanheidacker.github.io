@@ -9,7 +9,7 @@ interface ProjectPanelButtonArgs {
 }
 
 function ProjectPanelButton({ button }: { button: ProjectPanelButtonArgs }) {
-    const buttonRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLSpanElement>(null);
     const [hover, setHover] = useState<number>(0);
 
     useEffect(() => {

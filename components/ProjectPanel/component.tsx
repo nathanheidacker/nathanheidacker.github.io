@@ -1,4 +1,5 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useState, useRef } from "react";
 import GlitchText from "../GlitchText/alternate";
 import ProjectPanelButton from "./button";
 import ProjectPanelNav from "./nav";
@@ -84,6 +85,7 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                     {description.map((p, key) => {
                         return (
                             <GlitchText
+                                speed={5}
                                 key={key}
                                 className="mb-4"
                                 delay={delay}
@@ -103,13 +105,12 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
                     <div>
                         {(buttons || []).map((button, key) => {
                             return (
-                                <>
+                                <div className="mt-2" key={key}>
                                     <ProjectPanelButton
-                                        key={key}
                                         button={button}
                                     ></ProjectPanelButton>
                                     <br />
-                                </>
+                                </div>
                             );
                         })}
                     </div>
@@ -121,48 +122,68 @@ function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
     );
 }
 
-function ProjectPanelHero({ project }: { project: ProjectPanelArgs }) {
-    const { title, flavor, image, titleOverlay } = project;
-    const useTitleOverlay = titleOverlay !== undefined ? titleOverlay : true;
-    return (
-        <div className="relative overflow-hidden projectPanelHero">
-            <div className="absolute flex w-full h-full">
-                {useTitleOverlay ? (
-                    <div className="z-10 min-w-full font-bold place-self-center projectPanelTitle">
-                        {title}
-                    </div>
-                ) : (
-                    <></>
-                )}
-            </div>
-            <Image
-                className="opacity-50 grayscale"
-                src={image}
-                alt={flavor}
-                width={4096}
-                height={4096}
-            ></Image>
-        </div>
-    );
+function mod(n: number, m: number) {
+    return ((n % m) + m) % m;
 }
 
 function ProjectPanel({
     className,
-    active,
-    project,
+    projects,
 }: {
     className?: string;
-    active: boolean;
-    project: ProjectPanelArgs;
+    projects: ProjectPanelArgs[];
 }) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [projectIndex, setProjectIndex] = useState<number>(0);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            const nav = containerRef.current.querySelector(".projectPanelNav");
+            const info =
+                containerRef.current.querySelector(".projectPanelInfo");
+            if (nav && info) {
+                const [left, middle, right] = Array.from(nav.children);
+
+                const handleLeft = () => {
+                    setProjectIndex((current) =>
+                        mod(current - 1, projects.length)
+                    );
+                };
+                const handleMiddle = () => {
+                    if (info.classList.contains("active")) {
+                        info.classList.remove("active");
+                    } else {
+                        info.classList.add("active");
+                    }
+                };
+                const handleRight = () => {
+                    setProjectIndex((current) =>
+                        mod(current + 1, projects.length)
+                    );
+                };
+
+                left.addEventListener("click", handleLeft);
+                middle.addEventListener("click", handleMiddle);
+                right.addEventListener("click", handleRight);
+
+                return () => {
+                    removeEventListener("click", handleLeft);
+                    removeEventListener("click", handleMiddle);
+                    removeEventListener("click", handleRight);
+                };
+            }
+        }
+    }, [projects]);
+
     return (
-        <div className={`${className} text-neutral-100 projectPanel`}>
-            <ProjectPanelNav project={project}></ProjectPanelNav>
-            {active ? (
-                <ProjectPanelInfo project={project}></ProjectPanelInfo>
-            ) : (
-                <></>
-            )}
+        <div
+            ref={containerRef}
+            className={`${className} text-neutral-100 projectPanel`}
+        >
+            <ProjectPanelNav project={projects[projectIndex]}></ProjectPanelNav>
+            <ProjectPanelInfo
+                project={projects[projectIndex]}
+            ></ProjectPanelInfo>
         </div>
     );
 }

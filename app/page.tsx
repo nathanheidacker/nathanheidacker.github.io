@@ -77,7 +77,7 @@ function HeroText({ className, id }: { className?: string; id?: string }) {
 
 function Hero() {
     return (
-        <div className="flex flex-col place-content-center h-screen max-w-[2500px] relative hero">
+        <div className="flex flex-col place-content-center h-screen max-w-[1500px] relative hero">
             <div className="fixed h-full w-full max-w-[2500px] -z-40">
                 <Diamond className="h-full overflow-hidden absolute top-0 left-0 diamond"></Diamond>
             </div>
@@ -96,16 +96,16 @@ function Divider() {
 
 function AboutMe() {
     return (
-        <div className="flex flex-col place-content-center h-screen max-w-[2500px] w-4/5 m-auto">
+        <div className="flex flex-col place-content-center h-screen max-w-[1500px] w-4/5 m-auto">
             <div className="text-neutral-100 mb-6 md:mb-12 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
                 My Work
             </div>
-            <ProjectPanel active={true} project={PROJECTS[1]}></ProjectPanel>
+            <ProjectPanel projects={PROJECTS}></ProjectPanel>
         </div>
     );
 }
 
-export default function Home() {
+function Homes() {
     return (
         <>
             <HUD className="-z-30"></HUD>
@@ -121,3 +121,9 @@ export default function Home() {
         </>
     );
 }
+
+function Home() {
+    return <div></div>;
+}
+
+export default Homes;

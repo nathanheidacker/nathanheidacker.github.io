@@ -27,16 +27,16 @@ const GlitchText: React.FC<{ texts: string[]; className?: string }> = ({
     const [textIndex, setTextIndex] = useState(0);
     const [displayText, setDisplayText] = useState(texts[textIndex]);
 
-    let time = Date.now();
+    const time = useRef<number>(Date.now());
     const iters = 80;
     const iterTime = 30;
     const totalIterTime = iters * iterTime;
 
     useEffect(() => {
-        time = Date.now();
+        time.current = Date.now();
         let randomizer = setInterval(() => {
             const proportion = Math.max(
-                (totalIterTime - (Date.now() - time)) / totalIterTime,
+                (totalIterTime - (Date.now() - time.current)) / totalIterTime,
                 0.0
             );
             setDisplayText(

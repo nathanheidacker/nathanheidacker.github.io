@@ -23,68 +23,55 @@ const GlitchText: React.FC<{
 }> = ({ text, className, textClassName, delay, hover, speed = 1 }) => {
     const _delay = delay || 0;
 
-    const [animating, setAnimating] = useState<boolean>(false);
+    const intervals = useRef<NodeJS.Timeout[]>([]);
     const [textIndex, setTextIndex] = useState(0);
     const [displayText, setDisplayText] = useState("");
     const trailLength = 10;
 
-    const [updater, setUpdater] = useState<NodeJS.Timeout>();
-
     const ghostRef = useRef<HTMLDivElement>(null);
     const displayRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (!animating) {
-            setAnimating(true);
-            setTextIndex(0);
-            setTimeout(
-                () => {
-                    setUpdater(
-                        setInterval(() => {
-                            setTextIndex((i) => {
-                                const splitIndex = Math.max(0, i - trailLength);
-                                const cleanText = text.slice(0, splitIndex);
-                                const glitchText = randomize(
-                                    text.slice(splitIndex, i)
-                                );
-                                setDisplayText(cleanText + glitchText);
-                                return i + 1;
-                            });
-                        }, 10 / speed)
-                    );
-                },
-                hover ? 0 : _delay
-            );
-
-            return () => {
-                clearInterval(updater);
-            };
+    const clearIntervals = () => {
+        for (let interval of intervals.current) {
+            clearInterval(interval);
         }
-    }, [text, hover, speed, delay]);
+    };
 
     useEffect(() => {
-        if (!animating) {
-            const handle = setInterval(() => {
+        setTextIndex(0);
+        setTimeout(
+            () => {
+                intervals.current.push(
+                    setInterval(() => {
+                        setTextIndex((i) => {
+                            const splitIndex = Math.max(0, i - trailLength);
+                            const cleanText = text.slice(0, splitIndex);
+                            const glitchText = randomize(
+                                text.slice(splitIndex, i)
+                            );
+                            setDisplayText(cleanText + glitchText);
+                            return i + 1;
+                        });
+                    }, 10 / speed)
+                );
+            },
+            hover ? 0 : _delay
+        );
+
+        intervals.current.push(
+            setInterval(() => {
                 if (ghostRef.current && displayRef.current) {
                     displayRef.current.style.minHeight = `${ghostRef.current.clientHeight}px`;
                 }
-            }, 50);
+            }, 50)
+        );
 
-            // Stop updating the heights after one second
-            setTimeout(() => {
-                clearInterval(handle);
-            }, 2000);
-
-            return () => {
-                clearInterval(handle);
-            };
-        }
-    }, [text]);
+        return clearIntervals;
+    }, [text, hover]);
 
     useEffect(() => {
         if (textIndex - trailLength > text.length) {
-            clearInterval(updater);
-            setAnimating(false);
+            clearIntervals();
         }
     }, [textIndex]);
 
