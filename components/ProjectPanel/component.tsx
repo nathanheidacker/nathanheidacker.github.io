@@ -1,6 +1,7 @@
 import Image from "next/image";
 import GlitchText from "../GlitchText/alternate";
-import ProjectPanelButton, { ProjectPanelButtonArgs } from "./button";
+import ProjectPanelButton from "./button";
+import ProjectPanelNav from "./nav";
 import { ProjectPanelArgs } from "./projects";
 
 function ProjectPanelInfo({ project }: { project: ProjectPanelArgs }) {
@@ -145,14 +146,6 @@ function ProjectPanelHero({ project }: { project: ProjectPanelArgs }) {
     );
 }
 
-function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
-    return (
-        <div className="w-full">
-            <ProjectPanelHero project={project}></ProjectPanelHero>
-        </div>
-    );
-}
-
 function ProjectPanel({
     className,
     active,
@@ -164,7 +157,7 @@ function ProjectPanel({
 }) {
     return (
         <div className={`${className} text-neutral-100 projectPanel`}>
-            <ProjectPanelNav project={project}></ProjectPanelNav>
+            <ProjectPanelHero project={project}></ProjectPanelHero>
             {active ? (
                 <ProjectPanelInfo project={project}></ProjectPanelInfo>
             ) : (

@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { ShaderPass, EffectComposer } from "three/examples/jsm/Addons.js";
 
+const MIN_DISTANCE = -2.5;
+
 const diamondShader = new ShaderPass({
     name: "DiamondShader",
     uniforms: {
@@ -10,7 +12,7 @@ const diamondShader = new ShaderPass({
         iResolution: { value: new THREE.Vector2(5000, 5000) },
         iChannel0: { value: new THREE.Texture() },
         iScroll: { value: new THREE.Vector2(0, 0) },
-        iDist: { value: -2.0 },
+        iDist: { value: MIN_DISTANCE },
     },
     vertexShader: /* glsl */ `
     varying vec2 vUv;
@@ -229,11 +231,18 @@ function Diamond({ className }: { className?: string }) {
             });
 
             const animate = () => {
-                console.log(getFPS());
                 diamondShader.uniforms.iTime.value = clock.getElapsedTime();
-                if (getFPS() < 59) {
-                    // Push it farther away to increase fps
-                    diamondShader.uniforms.iDist.value *= 1.001;
+                if (clock.getElapsedTime() < 5) {
+                    if (getFPS() < 59) {
+                        // Push it farther away to increase fps
+                        diamondShader.uniforms.iDist.value -= 0.01;
+                    } else if (getFPS() > 61) {
+                        // Move it closer
+                        diamondShader.uniforms.iDist.value = Math.min(
+                            MIN_DISTANCE,
+                            diamondShader.uniforms.iDist.value + 0.01
+                        );
+                    }
                 }
                 composer.render();
             };

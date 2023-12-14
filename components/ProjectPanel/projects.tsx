@@ -24,7 +24,7 @@ const PROJECTS: ProjectPanelArgs[] = [
         projectStatus: "SUSPENDED",
         startDate: "November 2021",
         endDate: "July 2022",
-        image: "./temple.jpg",
+        image: "temple.jpg",
         buttons: [
             {
                 text: "// DOCS",

@@ -6,7 +6,6 @@ import {
     EffectComposer,
     SMAAPass,
 } from "three/examples/jsm/Addons.js";
-import perlinNoise from "./perlin";
 
 const diamondShader = new ShaderPass({
     name: "DiamondShader",

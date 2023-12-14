@@ -103,16 +103,12 @@ body {
   font-size: 4vw;
 }
 
-.projectPanelHero {
-  max-height: 10vh;
-  text-align: center;
-}
-
 .projectCarousel {
   max-width: 100vw;
 }
 
 .projectPanelInfo {
+  border-radius: 10px;
   padding: 2rem;
   font-size: 12px;
   min-height: 55vh;
@@ -130,6 +126,27 @@ body {
     border: 6px solid transparent;
     background-clip: content-box;
   }
+}
+
+.projectPanelNav {
+  max-height: 10vh;
+  text-align: center;
+  position: relative; /* relative here not on child */
+  z-index: 0;
+}
+
+.projectPanelNav > div {
+  border-radius: 10px;
+  mask: linear-gradient(#000 0 0);
+}
+
+.projectPanelNav > div:before {
+  transition: ease-in-out 0.3s;
+  opacity: 60%;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
 }
 
 @media (min-width: 760px) {
