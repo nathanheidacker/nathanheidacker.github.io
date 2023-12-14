@@ -14,8 +14,15 @@ function NavButton({ direction }: { direction: "left" | "right" }) {
 }
 
 function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
-    const { image, title } = project;
+    const { image, title, font } = project;
     const styleRef = useRef<HTMLStyleElement>(null);
+    const fontClass = font
+        ? `
+    .projectPanelNav > div.middle {
+        font-family: '${font}'; 
+    }
+    `
+        : "";
 
     useEffect(() => {
         if (styleRef.current) {
@@ -23,6 +30,8 @@ function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
             .projectPanelNav > div:before {
                 background-image: url(${image});
             }
+
+            ${fontClass}
             `;
         }
     }, [project]);

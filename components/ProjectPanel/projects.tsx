@@ -10,6 +10,7 @@ export interface ProjectPanelArgs {
     endDate?: string;
     buttons?: ProjectPanelButtonArgs[];
     titleOverlay?: boolean;
+    font?: string;
 }
 
 const ALPHAGRADIENT = {
@@ -34,6 +35,7 @@ const ALPHAGRADIENT = {
             href: "https://github.com/nathanheidacker/alphagradient",
         },
     ],
+    font: "asd",
 };
 
 const HEIDACKERAI = {
@@ -53,6 +55,7 @@ const HEIDACKERAI = {
             href: "https://heidacker.ai",
         },
     ],
+    font: "helvetica",
 };
 
 const YUGEN = {
@@ -73,6 +76,7 @@ const YUGEN = {
         },
     ],
     titleOverlay: false,
+    font: "ivymode",
 };
 
 const PORTFOLIOSITE = {

@@ -27,6 +27,12 @@
   src: url('/fonts/asd.ttf')
 }
 
+@font-face {
+  font-family: 'ivymode';
+  font-weight: bold;
+  src: url('/fonts/ivymode.ttf') 
+}
+
 
 body {
   font-family: 'asd';
