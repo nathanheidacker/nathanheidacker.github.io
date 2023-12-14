@@ -5,7 +5,7 @@ import { ProjectPanelArgs } from "./projects";
 function NavButton({ direction }: { direction: "left" | "right" }) {
     const icon = direction == "left" ? "<" : ">";
     return (
-        <div className="p-4 md:p-8 flex place-content-center grayscale hover:grayscale-0">
+        <div className={`p-4 md:p-8 flex place-content-center grayscale`}>
             <div className="place-self-center">{icon}</div>
         </div>
     );
@@ -30,7 +30,7 @@ function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
             <style ref={styleRef}></style>
             <div className="flex h-full mb-4 select-none projectPanelNav">
                 <NavButton direction="left"></NavButton>
-                <div className="grow flex place-content-center font-bold mx-4 grayscale hover:grayscale-0">
+                <div className="grow flex place-content-center font-bold mx-4 grayscale">
                     <div className="place-self-center">{title}</div>
                 </div>
                 <NavButton direction="right"></NavButton>

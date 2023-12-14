@@ -37,6 +37,21 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+
+  overflow: overlay;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+    border: none;
+    padding: none;
+    margin: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ffffff7c;
+    border-radius: 5px;
+  }
 }
 
 .gridPanel {
@@ -109,8 +124,8 @@ body {
 
 .projectPanelInfo {
   border-radius: 10px;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   padding-top: 0rem;
   padding-bottom: 0rem;
   font-size: 12px;
@@ -124,28 +139,27 @@ body {
               max-height 0.5s ease-in-out;
 
   &::-webkit-scrollbar {
-    width: 15px;
+    width: 5px;
     background-color: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: #a8a8a89a;
     border-radius: 20px;
-    border: 6px solid transparent;
+    border: none;
     background-clip: content-box;
   }
 }
 
 .projectPanelInfo.active {
-  min-height: 55vh;
-  max-height: 55vh;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  min-height: 65vh;
+  max-height: 65vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .projectPanelNav {
   transition: font-size 0s;
-  transition: all 0.2s ease-in-out;
   font-size: min(4vw, 6rem);
   max-height: 13vh;
   text-align: center;
@@ -154,9 +168,14 @@ body {
 }
 
 .projectPanelNav > div {
-  transition: ease-in-out 0.2s;
+  transition: background-color 1s ease-out;
   border-radius: 10px;
   mask: linear-gradient(#000 0 0);
+}
+
+.projectPanelNav > div.active {
+  transition: none;
+  background-color: white;
 }
 
 .projectPanelNav > div:before {
@@ -198,7 +217,14 @@ body {
   }
 
   .projectPanelInfo {
+    padding-left: 3rem;
+    padding-right: 3rem;
     font-size: 14px;
+  }
+
+  .projectPanelInfo.active {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }
 
@@ -228,5 +254,11 @@ body {
     font-weight: 450;
     text-transform: uppercase;
     color: rgba(var(--hud-font));
+  }
+}
+
+@media (hover: hover) {
+  .projectPanelNav > div:hover {
+    filter: grayscale(0%);
   }
 }

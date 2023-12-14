@@ -46,7 +46,7 @@ const HEIDACKERAI = {
     ],
     projectStatus: "ACTIVE",
     startDate: "August 2023",
-    image: "temple.jpg",
+    image: "light.png",
     buttons: [
         {
             text: "// WEBSITE",
@@ -65,7 +65,7 @@ const YUGEN = {
     ],
     projectStatus: "ACTIVE",
     startDate: "November 2023",
-    image: "temple.jpg",
+    image: "dark.png",
     buttons: [
         {
             text: "// WEBSITE",

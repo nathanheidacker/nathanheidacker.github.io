@@ -148,6 +148,10 @@ function ProjectPanel({
                     setProjectIndex((current) =>
                         mod(current - 1, projects.length)
                     );
+                    left.classList.add("active");
+                    setTimeout(() => {
+                        left.classList.remove("active");
+                    }, 1);
                 };
                 const handleMiddle = () => {
                     if (info.classList.contains("active")) {
@@ -155,21 +159,29 @@ function ProjectPanel({
                     } else {
                         info.classList.add("active");
                     }
+                    middle.classList.add("active");
+                    setTimeout(() => {
+                        middle.classList.remove("active");
+                    }, 1);
                 };
                 const handleRight = () => {
                     setProjectIndex((current) =>
                         mod(current + 1, projects.length)
                     );
+                    right.classList.add("active");
+                    setTimeout(() => {
+                        right.classList.remove("active");
+                    }, 1);
                 };
 
-                left.addEventListener("click", handleLeft);
-                middle.addEventListener("click", handleMiddle);
-                right.addEventListener("click", handleRight);
+                left.addEventListener("pointerdown", handleLeft);
+                middle.addEventListener("pointerdown", handleMiddle);
+                right.addEventListener("pointerdown", handleRight);
 
                 return () => {
-                    removeEventListener("click", handleLeft);
-                    removeEventListener("click", handleMiddle);
-                    removeEventListener("click", handleRight);
+                    removeEventListener("pointerdown", handleLeft);
+                    removeEventListener("pointerdown", handleMiddle);
+                    removeEventListener("pointerdown", handleRight);
                 };
             }
         }

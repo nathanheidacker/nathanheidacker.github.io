@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef, forwardRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const chars = "!<>-_\\/[]{}—åß∂ƒ©∆æ≈ç√∫=+*^?#________λ$"; //░▒▓
 
