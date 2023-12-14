@@ -186,6 +186,19 @@ body {
   position: absolute;
   z-index: -1;
   inset: 0;
+  background-position-y: center;
+}
+
+.projectPanelNav > div.left:before {
+  background-position-x: left;
+}
+
+.projectPanelNav > div.middle:before {
+  background-position-x: center;
+}
+
+.projectPanelNav > div.right:before {
+  background-position-x: right;
 }
 
 @media (min-width: 760px) {
