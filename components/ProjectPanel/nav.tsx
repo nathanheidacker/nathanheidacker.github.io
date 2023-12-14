@@ -19,10 +19,9 @@ function NavButton({ direction }: { direction: "left" | "right" }) {
 }
 
 function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
-    //const { image } = project;
-    //const styleRef = useRef<HTMLStyleElement>(null);
+    const { image } = project;
+    const styleRef = useRef<HTMLStyleElement>(null);
 
-    /*
     useEffect(() => {
         if (styleRef.current) {
             styleRef.current.textContent = `
@@ -32,13 +31,15 @@ function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
             `;
         }
     }, [project]);
-    */
 
     return (
-        <div className="flex h-full mb-4 projectPanelNav">
-            <NavButton direction="left"></NavButton>
-            <div className="grow mx-4"></div>
-            <NavButton direction="right"></NavButton>
+        <div>
+            <style ref={styleRef}></style>
+            <div className="flex h-full mb-4 projectPanelNav">
+                <NavButton direction="left"></NavButton>
+                <div className="grow mx-4"></div>
+                <NavButton direction="right"></NavButton>
+            </div>
         </div>
     );
 }

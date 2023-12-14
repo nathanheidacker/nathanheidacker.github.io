@@ -157,7 +157,7 @@ function ProjectPanel({
 }) {
     return (
         <div className={`${className} text-neutral-100 projectPanel`}>
-            <ProjectPanelHero project={project}></ProjectPanelHero>
+            <ProjectPanelNav project={project}></ProjectPanelNav>
             {active ? (
                 <ProjectPanelInfo project={project}></ProjectPanelInfo>
             ) : (
