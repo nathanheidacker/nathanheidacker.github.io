@@ -23,7 +23,7 @@ const ALPHAGRADIENT = {
     projectStatus: "SUSPENDED",
     startDate: "November 2021",
     endDate: "July 2022",
-    image: "temple.jpg",
+    image: "alphagradient.png",
     buttons: [
         {
             text: "// DOCS",
@@ -46,7 +46,7 @@ const HEIDACKERAI = {
     ],
     projectStatus: "ACTIVE",
     startDate: "August 2023",
-    image: "light.png",
+    image: "heidackerai2.png",
     buttons: [
         {
             text: "// WEBSITE",
@@ -56,16 +56,16 @@ const HEIDACKERAI = {
 };
 
 const YUGEN = {
-    title: "Yugen",
+    title: "Yūgen",
     flavor: "A 3D digital storefront for Japanese ceramic artists",
     description: [
-        "Yugen is a cutting-edge 3D digital storefront designed to showcase the exquisite craftsmanship of Japanese ceramic artists. Yugen is not merely a marketplace; it's a curated gallery where every piece comes to life in stunning three-dimensional detail, allowing patrons to explore the intricate nuances and timeless beauty of each creation.",
-        "At the heart of Yugen lies the groundbreaking Gaussian Splatting rendering technique, a state-of-the-art method that elevates the visualization of ceramic art to unprecedented levels. Unlike conventional rendering techniques, Gaussian Splatting meticulously captures the delicate textures, intricate details, and subtle nuances of each ceramic masterpiece, providing a true-to-life representation that goes beyond the limitations of traditional images. This novel approach ensures that users can authentically experience the artistry and craftsmanship of Japanese ceramics as if they were holding the pieces in their hands.",
-        "Yugen serves as a bridge between art and technology, creating a digital space where the profound beauty of Japanese ceramics is celebrated and accessible worldwide. By incorporating Gaussian Splatting, we redefine the standards of online art appreciation, offering a unique and unparalleled experience for enthusiasts, collectors, and connoisseurs alike.",
+        "Yūgen is a cutting-edge 3D digital storefront designed to showcase the exquisite craftsmanship of Japanese ceramic artists. Yūgen is not merely a marketplace; it's a curated gallery where every piece comes to life in stunning three-dimensional detail, allowing patrons to explore the intricate nuances and timeless beauty of each creation.",
+        "At the heart of Yūgen lies the groundbreaking Gaussian Splatting rendering technique, a state-of-the-art method that elevates the visualization of ceramic art to unprecedented levels. Unlike conventional rendering techniques, Gaussian Splatting meticulously captures the delicate textures, intricate details, and subtle nuances of each ceramic masterpiece, providing a true-to-life representation that goes beyond the limitations of traditional images. This novel approach ensures that users can authentically experience the artistry and craftsmanship of Japanese ceramics as if they were holding the pieces in their hands.",
+        "Yūgen serves as a bridge between art and technology, creating a digital space where the profound beauty of Japanese ceramics is celebrated and accessible worldwide. By incorporating Gaussian Splatting, we redefine the standards of online art appreciation, offering a unique and unparalleled experience for enthusiasts, collectors, and connoisseurs alike.",
     ],
     projectStatus: "ACTIVE",
     startDate: "November 2023",
-    image: "dark.png",
+    image: "yugen.png",
     buttons: [
         {
             text: "// WEBSITE",
@@ -81,7 +81,7 @@ const PORTFOLIOSITE = {
     description: [""],
     projectStatus: "ACTIVE",
     startDate: "October 2023",
-    image: "temple.jpg",
+    image: "alphagradient.png",
     buttons: [
         {
             text: "// MY RESUME",
@@ -91,11 +91,6 @@ const PORTFOLIOSITE = {
 };
 
 // Rearrange order here
-const PROJECTS: ProjectPanelArgs[] = [
-    YUGEN,
-    HEIDACKERAI,
-    ALPHAGRADIENT,
-    PORTFOLIOSITE,
-];
+const PROJECTS: ProjectPanelArgs[] = [YUGEN, HEIDACKERAI, ALPHAGRADIENT];
 
 export default PROJECTS;

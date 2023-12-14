@@ -9,13 +9,21 @@ interface ProjectPanelButtonArgs {
 }
 
 function ProjectPanelButton({ button }: { button: ProjectPanelButtonArgs }) {
+    const speed = 0.5;
     const buttonRef = useRef<HTMLSpanElement>(null);
     const [hover, setHover] = useState<number>(0);
+    const cooldown = useRef<boolean>(false);
 
     useEffect(() => {
         if (buttonRef.current) {
             buttonRef.current.addEventListener("mouseenter", () => {
-                setHover((h) => h + 1);
+                if (!cooldown.current) {
+                    cooldown.current = true;
+                    setHover((h) => h + 1);
+                }
+                setTimeout(() => {
+                    cooldown.current = false;
+                }, (10 * (button.text.length + 10)) / speed);
             });
         }
     }, []);
@@ -24,7 +32,7 @@ function ProjectPanelButton({ button }: { button: ProjectPanelButtonArgs }) {
         <a href={button.href}>
             <span ref={buttonRef} className={button.className}>
                 <GlitchText
-                    speed={0.5}
+                    speed={speed}
                     text={button.text}
                     hover={hover}
                     textClassName="redGradient text-xl font-bold font-bold"

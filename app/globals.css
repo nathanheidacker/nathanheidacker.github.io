@@ -169,6 +169,7 @@ body {
 
 .projectPanelNav > div {
   transition: background-color 1s ease-out;
+  transition: 0.3s ease-out;
   border-radius: 10px;
   mask: linear-gradient(#000 0 0);
 }
@@ -185,7 +186,6 @@ body {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-size: 100%;
 }
 
 @media (min-width: 760px) {

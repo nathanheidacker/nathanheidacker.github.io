@@ -5,7 +5,9 @@ import { ProjectPanelArgs } from "./projects";
 function NavButton({ direction }: { direction: "left" | "right" }) {
     const icon = direction == "left" ? "<" : ">";
     return (
-        <div className={`p-4 md:p-8 flex place-content-center grayscale`}>
+        <div
+            className={`p-4 md:p-8 flex place-content-center align-middle grayscale`}
+        >
             <div className="place-self-center">{icon}</div>
         </div>
     );
@@ -20,6 +22,8 @@ function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
             styleRef.current.textContent = `
             .projectPanelNav > div:before {
                 background: url("${image}");
+                background-position-x: left;
+                background-position-y: center;
             }
             `;
         }

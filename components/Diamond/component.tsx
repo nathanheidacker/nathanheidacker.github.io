@@ -199,7 +199,7 @@ function Diamond({ className }: { className?: string }) {
                 };
             }
             const loader = new THREE.TextureLoader();
-            const texture = loader.load("./dark.png");
+            const texture = loader.load("./refraction.png");
             const elem = container.current;
             const renderer = new THREE.WebGLRenderer();
             const composer = new EffectComposer(renderer);
