@@ -69,8 +69,8 @@ body {
 }
 
 .hud {
-  width: 90%;
-  height: 90%;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
   background-color: rgba(0, 0, 0, 0);
 
   --s: 30px; /* the size on the corner */
