@@ -215,6 +215,8 @@ function Diamond({ className }: { className?: string }) {
                 elem.clientHeight
             );
 
+            /*
+            // Looks super wonky on phones so its removed for now...
             window.addEventListener("resize", () => {
                 diamondShader.uniforms.iResolution.value.set(
                     elem.clientWidth,
@@ -222,6 +224,7 @@ function Diamond({ className }: { className?: string }) {
                 );
                 renderer.setSize(elem.clientWidth, elem.clientHeight);
             });
+            */
 
             window.addEventListener("scroll", () => {
                 diamondShader.uniforms.iScroll.value.set(
