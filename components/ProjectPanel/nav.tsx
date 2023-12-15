@@ -50,40 +50,4 @@ function ProjectPanelNav({ project }: { project: ProjectPanelArgs }) {
     );
 }
 
-function ProjectPanelNavs({ project }: { project: ProjectPanelArgs }) {
-    const { image, title } = project;
-    const styleRef = useRef<HTMLStyleElement>(null);
-
-    /*
-    useEffect(() => {
-        if (styleRef.current) {
-            styleRef.current.textContent = `
-            .projectPanelNav > div:before {
-                background-position-y: center;
-            }
-            `;
-        }
-    }, [project]);
-    */
-
-    return (
-        <div>
-            <style ref={styleRef}></style>
-            <div className="h-20 mb-4 flex select-none projectPanelNav">
-                <div className="hehexd">
-                    <NavButton direction="left"></NavButton>
-                </div>
-                <div className="grow mx-4">
-                    <div className="grow flex place-content-center font-bold mx-4 grayscale">
-                        <div className="place-self-center">{title}</div>
-                    </div>
-                </div>
-                <div>
-                    <NavButton direction="right"></NavButton>
-                </div>
-            </div>
-        </div>
-    );
-}
-
 export default ProjectPanelNav;

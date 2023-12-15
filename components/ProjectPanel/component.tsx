@@ -174,14 +174,14 @@ function ProjectPanel({
                     }, 1);
                 };
 
-                left.addEventListener("pointerdown", handleLeft);
-                middle.addEventListener("pointerdown", handleMiddle);
-                right.addEventListener("pointerdown", handleRight);
+                left.addEventListener("pointerup", handleLeft);
+                middle.addEventListener("pointerup", handleMiddle);
+                right.addEventListener("pointerup", handleRight);
 
                 return () => {
-                    removeEventListener("pointerdown", handleLeft);
-                    removeEventListener("pointerdown", handleMiddle);
-                    removeEventListener("pointerdown", handleRight);
+                    left.removeEventListener("pointerup", handleLeft);
+                    middle.removeEventListener("pointerup", handleMiddle);
+                    right.removeEventListener("pointerup", handleRight);
                 };
             }
         }
