@@ -210,8 +210,8 @@ body {
 
 @media (min-width: 760px) {
   .hud {
-    width: 90%;
-    height: 90%;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
     background-color: rgba(0, 0, 0, 0);
   
     --s: 50px; /* the size on the corner */
@@ -250,8 +250,8 @@ body {
 
 @media (min-width: 1024px) {
   .hud {
-    width: 90%;
-    height: 90%;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
     background-color: rgba(0, 0, 0, 0);
   
     --s: 60px; /* the size on the corner */
