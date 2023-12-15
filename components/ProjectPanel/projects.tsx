@@ -19,7 +19,7 @@ const ALPHAGRADIENT = {
     description: [
         "AlphaGradient is a python package for creating and backtesting financial algorithms. AlphaGradient implements asset and portfolio-analagous data structures that interact in intuitive ways, and provides a framework for developing algorithms that utilize these objects in highly parallelized backtests. AlphaGradient is built on top of the industry's most widely adopted libraries, and requires comparatively minimal technical know-how to pick up.",
         "Where other libraries might require you to be a programmer first and and a certified quantitative financial analyst second, AlphaGradient is truly geared towards hobbyist algorithmic traders who want to play around with ideas for financial algorithms. Within minutes, you can have a fully backtestable algorithm using nothing but basic python.",
-        "AlphaGradient is to the algorithmic trader as console gaming is to the gamer; it gets the job done and comes at a bargain--batteries included. If you have even a passing interest in finance or algorithmic trading, this package makes it as easy as possible to get involved without having a background in computer science.",
+        "If you have even a passing interest in finance or algorithmic trading, this package makes it as easy as possible to get involved without having a background in computer science.",
     ],
     projectStatus: "SUSPENDED",
     startDate: "November 2021",
@@ -43,7 +43,7 @@ const HEIDACKERAI = {
     flavor: "A digital marketing agency created by my brother and I",
     description: [
         "heidacker.ai is a digital marketing agency that specializes in creating captivating 3D art installations for generative AI startups. Our team is a fusion of creativity and expertise, dedicated to translating complex innovations into immersive web experiences.",
-        "At HEIDACKER.AI, we craft interactive 3D showcases that bring AI-driven products to life. Our goal is to seamlessly demonstrate the value and possibilities of these innovations to businesses and individuals alike. Through our work, we aim to transform intricate concepts into engaging digital narratives.",
+        "heidacker.ai aims to craft interactive 3D showcases that bring AI-driven products to life. Our goal is to seamlessly demonstrate the value and possibilities of these innovations to businesses and individuals alike. Through our work, we aim to transform intricate concepts into engaging digital narratives.",
         "Our approach is rooted in collaboration and skill. We deeply understand your product, design a compelling 3D narrative, and then bring it to life using cutting-edge technology. The result is an intuitive, cross-platform experience that lets your product shine without distractions.",
     ],
     projectStatus: "ACTIVE",
