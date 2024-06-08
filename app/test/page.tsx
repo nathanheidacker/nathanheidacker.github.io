@@ -7,6 +7,7 @@ import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { RectAreaLightHelper } from "three/addons/helpers/RectAreaLightHelper.js";
 import { GUI } from "lil-gui";
 import { Howl, Howler } from "howler";
+import { faWindowMinimize } from "@fortawesome/free-regular-svg-icons";
 
 function gaussianRandom(mean = 0, stdev = 1) {
     const u = 1 - Math.random(); // Converting [0,1) to (0,1]
@@ -683,7 +684,7 @@ function Environment() {
 
             const renderer = new THREE.WebGLRenderer();
             renderer.setSize(elem.clientWidth, elem.clientHeight);
-            //renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setPixelRatio(window.devicePixelRatio);
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
             const camera = new THREE.PerspectiveCamera(
@@ -696,7 +697,7 @@ function Environment() {
 
             const scene = new THREE.Scene();
             const composer = new EffectComposer(renderer);
-            const pixelPass = new PixelPass(4, scene, camera);
+            const pixelPass = new PixelPass(Math.floor(3 * window.devicePixelRatio), scene, camera);
             composer.addPass(pixelPass);
             composer.setSize(elem.clientWidth, elem.clientHeight);
 
