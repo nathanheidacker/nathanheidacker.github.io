@@ -696,7 +696,7 @@ function Environment() {
 
             const scene = new THREE.Scene();
             const composer = new EffectComposer(renderer);
-            const pixelPass = new PixelPass(3, scene, camera);
+            const pixelPass = new PixelPass(6, scene, camera);
             composer.addPass(pixelPass);
             composer.setSize(elem.clientWidth, elem.clientHeight);
 
