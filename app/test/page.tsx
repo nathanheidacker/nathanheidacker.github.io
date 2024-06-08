@@ -683,7 +683,7 @@ function Environment() {
 
             const renderer = new THREE.WebGLRenderer();
             renderer.setSize(elem.clientWidth, elem.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            //renderer.setPixelRatio(window.devicePixelRatio);
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
             const camera = new THREE.PerspectiveCamera(
@@ -696,7 +696,7 @@ function Environment() {
 
             const scene = new THREE.Scene();
             const composer = new EffectComposer(renderer);
-            const pixelPass = new PixelPass(6, scene, camera);
+            const pixelPass = new PixelPass(4, scene, camera);
             composer.addPass(pixelPass);
             composer.setSize(elem.clientWidth, elem.clientHeight);
 
