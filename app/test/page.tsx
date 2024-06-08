@@ -687,7 +687,7 @@ function Environment() {
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
             const camera = new THREE.PerspectiveCamera(
-                60,
+                75,
                 window.innerWidth / window.innerHeight,
                 0.1,
                 2000
@@ -696,7 +696,7 @@ function Environment() {
 
             const scene = new THREE.Scene();
             const composer = new EffectComposer(renderer);
-            const pixelPass = new PixelPass(1, scene, camera);
+            const pixelPass = new PixelPass(3, scene, camera);
             composer.addPass(pixelPass);
             composer.setSize(elem.clientWidth, elem.clientHeight);
 
@@ -707,7 +707,7 @@ function Environment() {
 
             const horizonColor = color255(45, 50, 80);
             scene.background = horizonColor;
-            const floor = createGround(100, 100);
+            const floor = createGround(80, 80);
             scene.add(floor);
             const ambient = new THREE.AmbientLight(color255(102, 136, 255), 1);
             scene.add(ambient);
@@ -735,7 +735,7 @@ function Environment() {
             brush1.position.z = -1;
             //scene.add(brush1)
 
-            //const controls = new OrbitControls(camera, renderer.domElement);
+            const controls = new OrbitControls(camera, renderer.domElement);
             camera.lookAt(new THREE.Vector3(-15, 0, -15));
             const clock = new THREE.Clock();
             const animate = () => {
@@ -756,9 +756,14 @@ function Environment() {
                     >
                 ).material.uniforms.time.value = clock.getElapsedTime();
                 composer.render();
+                
+                if (false && clock.getElapsedTime() % 1 < 0.001) {
+                    console.log(camera.position.x, camera.position.y, camera.position.z)
+                    console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+                }
             };
-            camera.position.set(-15.565, 0.24945, -11.27);
-            camera.rotation.set(2.694, -1.113, 2.735);
+            camera.position.set(-13.014682564973398, 0.25023915684972087, -9.608193800634998);
+            camera.rotation.set(2.5972713696066094, -1.2363717085292816, 2.622178772676298);
             renderer.setAnimationLoop(animate);
             container.current.appendChild(renderer.domElement);
         }
