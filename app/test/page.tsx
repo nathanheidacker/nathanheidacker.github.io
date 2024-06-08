@@ -736,7 +736,7 @@ function Environment() {
             brush1.position.z = -1;
             //scene.add(brush1)
 
-            const controls = new OrbitControls(camera, renderer.domElement);
+            //const controls = new OrbitControls(camera, renderer.domElement);
             camera.lookAt(new THREE.Vector3(-15, 0, -15));
             const clock = new THREE.Clock();
             const animate = () => {
