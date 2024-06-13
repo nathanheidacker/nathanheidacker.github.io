@@ -189,12 +189,12 @@ function createAltBuilding(width: number, depth: number, height: number) {
             #define HORIZON_COLOR vec3(0.176, 0.196, 0.314)
             #define STREET_LIGHTING_STRENGTH 0.07
             #define FOG_START 20.0
-            #define FOG_END 50.0
+            #define FOG_END 40.0
             #define WINDOW_ASPECT 2.0
             #define BUILDING_SCALE 3.0
             #define MIN_WINDOW_CHANCE 0.10
             #define MAX_WINDOW_CHANCE 0.20
-            #define FLICKER_CHANCE 0.05
+            #define FLICKER_CHANCE 0.10
 
             float random(vec3 seed) {
                 vec3 dotSeed = vec3(
@@ -698,7 +698,7 @@ function Environment() {
             const scene = new THREE.Scene();
             const composer = new EffectComposer(renderer);
 
-            let pixelPassDetail = Math.floor(3 * window.devicePixelRatio)
+            let pixelPassDetail = Math.floor(3 * window.devicePixelRatio);
             if (window.devicePixelRatio > 1) {
                 pixelPassDetail -= 1;
             }
@@ -762,14 +762,30 @@ function Environment() {
                     >
                 ).material.uniforms.time.value = clock.getElapsedTime();
                 composer.render();
-                
+
                 if (false && clock.getElapsedTime() % 1 < 0.001) {
-                    console.log(camera.position.x, camera.position.y, camera.position.z)
-                    console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z)
+                    console.log(
+                        camera.position.x,
+                        camera.position.y,
+                        camera.position.z
+                    );
+                    console.log(
+                        camera.rotation.x,
+                        camera.rotation.y,
+                        camera.rotation.z
+                    );
                 }
             };
-            camera.position.set(-13.014682564973398, 0.25023915684972087, -9.608193800634998);
-            camera.rotation.set(2.5972713696066094, -1.2363717085292816, 2.622178772676298);
+            camera.position.set(
+                -13.014682564973398,
+                0.25023915684972087,
+                -9.608193800634998
+            );
+            camera.rotation.set(
+                2.5972713696066094,
+                -1.2363717085292816,
+                2.622178772676298
+            );
             renderer.setAnimationLoop(animate);
             container.current.appendChild(renderer.domElement);
         }
@@ -817,14 +833,210 @@ function MessageInput() {
     );
 }
 
-function Page() {
+function MailboxSVG() {
+    return (
+        <svg
+            className="w-full h-[100%] opacity-30 hover:opacity-60 transition-opacity"
+            viewBox="0 0 80 50"
+        >
+            <polygon
+                points="0,0 0,10 40,30 80,10 80,0"
+                fill="white"
+                strokeLinejoin="round"
+            ></polygon>
+            <polygon
+                points="0,15 0,50 80,50, 80,15 40,35"
+                fill="white"
+            ></polygon>
+        </svg>
+    );
+}
+
+function AudioSVG({ muted }: { muted: boolean }) {
+    const opacity = muted ? 100 : 0;
+
+    const lineOpacity = `transition-opacity opacity-${opacity}`;
+    const waveOpacity = `transition-opacity opacity-${100 - opacity}`;
+
+    return (
+        <svg
+            className="w-full h-full opacity-30 hover:opacity-60 transition-opacity"
+            viewBox="-20 10 140 80"
+        >
+            <polygon
+                points="20,30 30,30 60,10 60,90 30,70 20,70"
+                fill="white"
+            ></polygon>
+            <circle r="20" cx="20" cy="50" fill="white"></circle>
+            <line
+                className={lineOpacity}
+                id="muted"
+                x1="-20"
+                x2="90"
+                y1="50"
+                y2="50"
+                stroke="white"
+                strokeWidth={10}
+            ></line>
+            <path
+                className={waveOpacity}
+                id="smallWave"
+                d="M 75,65 L 80,70 A 1,1 0 0,0 80,30 L 75,35 A 1,1 0 0,1 75,65 Z"
+                fill="white"
+            ></path>
+            <path
+                className={waveOpacity}
+                id="bigWave"
+                d="M 85,75 L 90,80 A 1,1 0 0,0 90,20 L 85,25 A 1,1 0 0,1 85,75 Z"
+                fill="white"
+            ></path>
+        </svg>
+    );
+}
+
+function Message({
+    messageVisible,
+    message,
+}: {
+    messageVisible: boolean;
+    message: string;
+}) {
+    const parts = message.split("\n");
+
+    return (
+        <div
+            id="message"
+            className={`m-20 text-2xl text-wrap opacity-${
+                messageVisible ? 100 : 0
+            }`}
+        >
+            {" "}
+            <div className="h-[13vh]"></div>
+            <div className="flex flex-col space-y-4">
+                {parts.map((part, index) => {
+                    return <p key={index}>{part}</p>;
+                })}
+            </div>
+            <div className="h-[25vh]"></div>
+        </div>
+    );
+}
+
+const message = `
+Ruka,
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Ut sed blandit orci</b>, a vulputate orci. Fusce dapibus elit vel metus pharetra condimentum. Quisque non nulla eu diam rutrum elementum. Vestibulum et mi a odio fringilla dapibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent nec dolor et eros porta finibus. Fusce porta vestibulum turpis sit amet pulvinar.
+
+Cras cursus, tellus ac pellentesque pulvinar, libero lacus rutrum justo, eu laoreet dolor nisi sit amet nunc. Integer dignissim rhoncus ante, ut molestie est blandit sed. Donec feugiat feugiat orci quis feugiat. Morbi erat nisl, pharetra consequat justo vel, congue euismod risus. Vivamus eget eros eget augue iaculis euismod. Mauris lobortis pharetra ipsum quis consectetur. Proin nisl diam, suscipit at aliquet eu, dignissim a sem. Phasellus mollis metus non bibendum interdum. Ut pulvinar scelerisque ante ut semper. Mauris consequat et felis id pharetra.
+
+In sit amet mauris pretium, lobortis enim ac, finibus tellus. Morbi porta rutrum ligula in suscipit. Sed non lacus nulla. Aliquam at nulla non diam pretium posuere vel luctus odio. Donec bibendum lacinia mauris, ut iaculis erat ullamcorper ac. Praesent pretium quis lorem sit amet laoreet. Mauris turpis tortor, tempus ac tempus ac, rhoncus vel ex.
+
+Pellentesque placerat quis turpis eu ornare. Cras sit amet urna id libero porta porta. Morbi a enim vel lacus dapibus placerat ut non nisl. Nullam egestas aliquet blandit. In at velit nec magna elementum porttitor nec id lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus luctus gravida elit ac congue. Curabitur finibus neque massa, porta maximus neque sagittis at. Aliquam erat volutpat. Ut viverra metus felis, ac dictum risus dignissim et. In pretium ultrices ex, non vestibulum nisi sollicitudin a.
+
+Love,
+
+Nathan
+`;
+
+function Interface() {
+    const [messageVisible, setMessageVisible] = useState(false);
+    const [volume, setVolume] = useState(0.2);
+    const [muted, setMuted] = useState(false);
 
     const ambientSound = new Howl({
-        src: ["bg_sound.mp3"]
-    })
+        src: ["bg_sound.mp3"],
+        loop: true,
+        volume: 1,
+    });
+
+    const bgMusic = new Howl({
+        src: ["bg_music.mp3"],
+        loop: true,
+    });
+
+    useEffect(() => {
+        bgMusic.play();
+        return () => {
+            bgMusic.stop();
+            ambientSound.stop();
+        };
+    }, []);
+
+    useEffect(() => {
+        Howler.volume(volume * (muted ? 0 : 1));
+    }, [volume, muted]);
+
+    return (
+        <div className="max-w-[800px] mx-auto">
+            <div className="h-12"></div>
+            <div className="flex place-content-between h-8 mx-12">
+                <div id="volumeControls" className="flex space-x-8">
+                    <div
+                        onClick={() => {
+                            setMuted(!muted);
+                        }}
+                    >
+                        <AudioSVG muted={muted}></AudioSVG>
+                    </div>
+                    <input
+                        id="volume"
+                        type="range"
+                        className="volumeSlider opacity-30 hover:opacity-60 transition-opacity"
+                        min={0}
+                        max={1}
+                        step={0.001}
+                        value={volume}
+                        onChange={(e) => {
+                            setVolume(parseFloat(e.target.value));
+                        }}
+                    />
+                </div>
+
+                <div
+                    id="messageControls"
+                    className=""
+                    onClick={() => {
+                        setMessageVisible(!messageVisible);
+                    }}
+                >
+                    <MailboxSVG></MailboxSVG>
+                </div>
+            </div>
+            <Message
+                messageVisible={messageVisible}
+                message={message}
+            ></Message>
+        </div>
+    );
+}
+
+function Page() {
     return (
         <div>
             <Environment></Environment>
+            <Interface></Interface>
+            <style>
+                {`
+                
+                .volumeSlider {
+                    -webkit-appearance: none;
+                    border-radius: 1rem;
+                    height: 30%;
+                    outline: none;
+                    margin: auto;
+                }
+                
+                #message {
+                    transition: opacity 0.5s ease-out;
+                    max-height: 80vh;
+                    overflow-y: scroll;
+                    scrollbar-width: none;
+                    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+                }
+                
+                
+                `}
+            </style>
         </div>
     );
 }
