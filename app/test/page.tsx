@@ -860,7 +860,7 @@ function AudioSVG({ muted }: { muted: boolean }) {
 
     return (
         <svg
-            className="w-full h-full opacity-30 hover:opacity-60 transition-opacity"
+            className="w-full h-full grow opacity-30 hover:opacity-60 transition-opacity"
             viewBox="-20 10 140 80"
         >
             <polygon
@@ -906,7 +906,7 @@ function Message({
     return (
         <div
             id="message"
-            className={`m-20 text-2xl text-wrap opacity-${
+            className={`m-12 md:m-20 text-md md:text-xl text-wrap opacity-${
                 messageVisible ? 100 : 0
             }`}
         >
@@ -914,7 +914,12 @@ function Message({
             <div className="h-[13vh]"></div>
             <div className="flex flex-col space-y-4">
                 {parts.map((part, index) => {
-                    return <p key={index}>{part}</p>;
+                    return (
+                        <p
+                            key={index}
+                            dangerouslySetInnerHTML={{ __html: part }}
+                        ></p>
+                    );
                 })}
             </div>
             <div className="h-[25vh]"></div>
@@ -968,9 +973,12 @@ function Interface() {
 
     return (
         <div className="max-w-[800px] mx-auto">
-            <div className="h-12"></div>
-            <div className="flex place-content-between h-8 mx-12">
-                <div id="volumeControls" className="flex space-x-8">
+            <div className="h-8 md:h-12"></div>
+            <div className="flex place-content-between h-6 md:h-8 mx-8 md:mx-12">
+                <div
+                    id="volumeControls"
+                    className="flex space-x-4 md:space-x-8 mr-12"
+                >
                     <div
                         onClick={() => {
                             setMuted(!muted);
@@ -981,7 +989,7 @@ function Interface() {
                     <input
                         id="volume"
                         type="range"
-                        className="volumeSlider opacity-30 hover:opacity-60 transition-opacity"
+                        className="volumeSlider w-1/2 opacity-30 hover:opacity-60 transition-opacity"
                         min={0}
                         max={1}
                         step={0.001}
@@ -1012,7 +1020,7 @@ function Interface() {
 
 function Page() {
     return (
-        <div>
+        <div className="max-h-screen overflow-hidden">
             <Environment></Environment>
             <Interface></Interface>
             <style>
