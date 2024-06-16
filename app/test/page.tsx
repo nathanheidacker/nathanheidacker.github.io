@@ -8,6 +8,7 @@ import { RectAreaLightHelper } from "three/addons/helpers/RectAreaLightHelper.js
 import { GUI } from "lil-gui";
 import { Howl, Howler } from "howler";
 import { faWindowMinimize } from "@fortawesome/free-regular-svg-icons";
+import { ShaderPass } from "three/examples/jsm/Addons.js";
 
 function gaussianRandom(mean = 0, stdev = 1) {
     const u = 1 - Math.random(); // Converting [0,1) to (0,1]
@@ -56,97 +57,82 @@ class PixelPass extends RenderPixelatedPass {
     }
 }
 
+function createRain() {
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load("noise.png");
+    const geometry = new THREE.PlaneGeometry(1, 1);
+    const material = new THREE.ShaderMaterial({
+        transparent: true,
+        uniforms: {
+            time: { value: 0.0 },
+            noiseTexture: { value: texture },
+        },
+        vertexShader: /*glsl*/ `
+            varying vec2 vUv;
+
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+            }
+        `,
+        fragmentShader: /*glsl*/ `
+            uniform float time;
+            uniform sampler2D noiseTexture;
+            varying vec2 vUv;
+
+            #define HORIZON_COLOR vec3(0.176, 0.196, 0.314)
+            #define WIND_SPEED 0.1
+            #define LAYERS 16
+
+            float hash( float n ) {
+                return fract(sin(n)*687.3123);
+            }
+
+            float noise( in vec2 x ) {
+                vec2 p = floor(x);
+                vec2 f = fract(x);
+                f = f*f*(3.0-2.0*f);
+                float n = p.x + p.y*157.0;
+                return mix(mix( hash(n+  0.0), hash(n+  1.0),f.x),
+                        mix( hash(n+157.0), hash(n+158.0),f.x),f.y);
+            }
+
+            void main() {
+
+                float wind = dot(texture2D(noiseTexture, fract(vec2(time / 100.0))).xyz, vec3(1.0));
+                wind = wind * 2.0 - 1.0;
+                wind *= WIND_SPEED;
+                wind = WIND_SPEED;
+
+                float alpha = 0.0;
+                float ttime = time * 2.0;
+
+                for (int i = 0; i < LAYERS; i++) {
+                    float layer = float(i + 1);
+                    float size = pow(1.2, layer);
+                    float dist = pow(0.9, layer);
+                    float offset = hash(floor((vUv.x + (wind * vUv.y)) * 800.0 * size));
+                    float rain = (sin(10. * (vUv.y + offset + ttime)) + sin(vUv.y + (ttime * offset) + offset * 1000.)) / 2.;
+                    if (rain > 0.99) {
+                        alpha = 0.03 * dist;
+                    }
+                }
+
+                gl_FragColor = vec4(vec3(1.0), alpha);
+            }
+        
+        `,
+    });
+    return new THREE.Mesh(geometry, material);
+}
+
+function createBrightLight() {}
+
 function color255(R: number, G: number, B: number): THREE.Color {
     return new THREE.Color(R / 255, G / 255, B / 255);
 }
 
-function pointLight() {
-    return new THREE.PointLight(
-        new THREE.Color(1.42, 0.82, 0.11),
-        0.3,
-        1.0,
-        0.2
-    );
-}
-
-function stairwell(height: number): THREE.Group {
-    const stairwell = new THREE.Group();
-    const stairwellHeight = height * 0.9;
-    const rectLight = new THREE.RectAreaLight(
-        new THREE.Color(1.14, 0.82, 0.11),
-        0.25,
-        0.02,
-        stairwellHeight
-    );
-    rectLight.rotateY(Math.PI);
-    rectLight.position.y += stairwellHeight / 2;
-    stairwell.add(rectLight);
-    const nFloors = height * 2 - 1;
-    let heightOffset = 0.5;
-    for (let n = 0; n < nFloors; n++) {
-        if (Math.random() < 0.8 || n == 0 || n == nFloors - 1) {
-            const pLight = pointLight();
-            pLight.position.y += heightOffset;
-            stairwell.add(pLight);
-        }
-        heightOffset += 0.5;
-    }
-    return stairwell;
-}
-
-function windows(width: number, height: number) {
-    const lights = new THREE.Group();
-    const nFloors = height * 2 - 1;
-    const nRooms = width * 4;
-    let heightOffset = 0.5;
-    let widthOffset = 0.0;
-    for (let n = 0; n < nFloors; n++) {
-        for (let k = 0; k < nRooms; k++) {
-            if (Math.random() < 0.1) {
-                const pLight = pointLight();
-                pLight.position.x = widthOffset;
-                pLight.position.y = heightOffset;
-                lights.add(pLight);
-            }
-            widthOffset += 0.25;
-        }
-        heightOffset += 0.5;
-        widthOffset = 0;
-    }
-    return lights;
-}
-
 function createBuilding(width: number, depth: number, height: number) {
-    const cube = new THREE.Mesh(
-        new THREE.BoxGeometry(width, height, depth),
-        new THREE.MeshStandardMaterial({
-            color: new THREE.Color(1.53, 1.01, 0.82),
-        })
-    );
-    cube.position.y += height / 2;
-
-    const stairs = stairwell(height);
-    stairs.position.z = depth / -2 - 0.015;
-    stairs.position.x = width / -2 + 0.1;
-
-    const windowLights = windows(width - 0.4, height);
-    windowLights.position.z = depth / -2 - 0.015;
-    windowLights.position.x = width / -2 + 0.35;
-
-    const leftWindowLights = windows(width - 0.2, height);
-    leftWindowLights.rotateY(Math.PI / 2);
-    leftWindowLights.position.x = width / 2 + 0.015;
-    leftWindowLights.position.z = depth / 2 - 0.1;
-
-    const building = new THREE.Group();
-    building.add(cube);
-    //building.add(stairs);
-    //building.add(windowLights);
-    //building.add(leftWindowLights);
-    return building;
-}
-
-function createAltBuilding(width: number, depth: number, height: number) {
     const material = new THREE.ShaderMaterial({
         uniforms: {
             //seed: { value: Math.random() },
@@ -320,7 +306,7 @@ function createCity(
     columns: number,
     peak: [number, number],
     minHeight: number = 2,
-    maxHeight: number = 8,
+    maxHeight: number = 12,
     minSize: number = 1,
     maxSize: number = 2
 ): THREE.Group {
@@ -345,7 +331,7 @@ function createCity(
 
             let baseHeight = minHeight + heightVariance * (1 - dist);
             let heightOffset =
-                (Math.random() * 2 - 1) * dist * heightVariance * 0.65;
+                (Math.random() * 2 - 1) * dist * heightVariance * 0.4;
             let height = Math.min(
                 Math.max(baseHeight + heightOffset, minHeight),
                 maxHeight
@@ -353,7 +339,7 @@ function createCity(
 
             let baseWidth = minSize + sizeVariance * (1 - dist);
             let widthOffset =
-                (Math.random() * 2 - 1) * dist * sizeVariance * 0.65;
+                (Math.random() * 2 - 1) * dist * sizeVariance * 0.4;
             let width = Math.min(
                 Math.max(baseWidth + widthOffset, minSize),
                 maxSize
@@ -361,13 +347,13 @@ function createCity(
 
             let baseDepth = minSize + sizeVariance * (1 - dist);
             let depthOffset =
-                (Math.random() * 2 - 1) * dist * sizeVariance * 0.65;
+                (Math.random() * 2 - 1) * dist * sizeVariance * 0.4;
             let depth = Math.min(
                 Math.max(baseDepth + depthOffset, minSize),
                 maxSize
             );
 
-            let building = createAltBuilding(width, depth, height);
+            let building = createBuilding(width, depth, height);
             building.position.x = xOffset;
             building.position.z = zOffset;
             xOffset += width * 2;
@@ -378,21 +364,6 @@ function createCity(
         zOffset += maxSize;
     }
     return city;
-}
-
-function createPallette(colors: Array<[number, number, number]>): THREE.Group {
-    const pallette = new THREE.Group();
-    let offset = 0;
-    for (let color of colors) {
-        const cube = new THREE.Mesh(
-            new THREE.BoxGeometry(0.2, 0.2, 0.2),
-            new THREE.MeshStandardMaterial({ color: color255(...color) })
-        );
-        cube.position.x += offset;
-        offset += 0.2;
-        pallette.add(cube);
-    }
-    return pallette;
 }
 
 function createGrass(radius: number, count: number): THREE.InstancedMesh {
@@ -542,44 +513,37 @@ function createGrass(radius: number, count: number): THREE.InstancedMesh {
 
 function createBrush(
     width: number,
-    depth: number,
-    count: number
-): THREE.InstancedMesh {
-    const geometry = new THREE.PlaneGeometry();
+    height: number,
+    layers: number,
+    brightness: number
+): THREE.Group {
     const loader = new THREE.TextureLoader();
     const texture = loader.load("noise.png");
-    const material = new THREE.ShaderMaterial({
-        side: THREE.DoubleSide,
-        transparent: true,
-        uniforms: { noiseTexture: { value: texture } },
-        vertexShader: /*glsl*/ `
+    const makeMaterial = (seed: number, dims: THREE.Vector3, iter: number) => {
+        return new THREE.ShaderMaterial({
+            transparent: true,
+            uniforms: {
+                brightness: { value: brightness },
+                seed: { value: seed },
+                layer: { value: iter },
+                noiseTexture: { value: texture },
+                dimensions: { value: dims },
+            },
+            vertexShader: /*glsl*/ `
             precision lowp float;
 
             varying vec2 vUv;
             varying vec3 vWorldPos;
             varying vec3 vCameraPos;
-
-            uniform sampler2D noiseTexture;
-
-            float random(vec3 seed) {
-                vec3 dotSeed = vec3(
-                    dot(seed, vec3(127.1, 311.7, 74.7)),
-                    dot(seed, vec3(269.5, 183.3, 246.1)),
-                    dot(seed, vec3(113.5, 271.9, 124.6))
-                );
-                float combined = dot(dotSeed, vec3(1.0));
-                return fract(sin(combined) * 43758.5453);
-            }
 
             void main() {
                 vUv = uv;
-                vWorldPos = (instanceMatrix * vec4(position, 1.0)).xyz;
-                vCameraPos = (modelViewMatrix * vec4(vWorldPos, 1.0)).xyz;
-                vec4 worldPosition = instanceMatrix * vec4(position, 1.0);
-                gl_Position = projectionMatrix * modelViewMatrix * worldPosition;
+                vCameraPos = (modelViewMatrix * vec4(position, 1.0)).xyz;
+                vWorldPos = (modelMatrix * vec4( position, 1.0 )).xyz;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
         `,
-        fragmentShader: /* glsl */ `
+            fragmentShader: /* glsl */ `
             precision lowp float;
 
             varying vec2 vUv;
@@ -587,37 +551,90 @@ function createBrush(
             varying vec3 vCameraPos;
 
             uniform sampler2D noiseTexture;
+            uniform vec3 dimensions;
+            uniform float seed;
+            uniform float layer;
+            uniform float brightness;
 
-            #define FRONT_COLOR vec3(0.1,0.1,0.2)
-            #define BACK_COLOR vec3(0.165,0.184,0.294)
+            #define N_ITER 5
+            #define HORIZON_COLOR vec3(0.176, 0.196, 0.314)
+            #define FOG_START 0.0
+            #define FOG_END 40.0
+
+            float hash( float n ) {
+                return fract(sin(n)*687.3123);
+            }
+
+            float noise( in vec2 x ) {
+                vec2 p = floor(x);
+                vec2 f = fract(x);
+                f = f*f*(3.0-2.0*f);
+                float n = p.x + p.y*157.0;
+                return mix(mix( hash(n+  0.0), hash(n+  1.0),f.x),
+                        mix( hash(n+157.0), hash(n+158.0),f.x),f.y);
+            }
+
+            float sigmoid(float x) {
+                return 1.0 / (1.0 + exp(-x));
+            }
         
             void main() {
-                vec3 color = mix(FRONT_COLOR, BACK_COLOR, vWorldPos.x);
-                float alpha = 1.0;
-                float offset = dot(texture2D(noiseTexture, fract(vUv.xx + vWorldPos.xz)), vec4(1.0)) / 3.0;
-                float base_height = 1.0 - length(vUv - vec2(0.5)) - (0.5 * -vWorldPos.x);
+                vec3 color = HORIZON_COLOR * brightness;
 
-                if (vUv.y > base_height) {
+                vec2 coords = vUv * 2.0 - 1.0;
+
+                float alpha = 1.0;
+                float base_height = -pow(coords.x, 2.0) - 0.3;
+                float alt_height = 1.0;
+                float offset = seed;
+                float magnitude = 0.1;
+
+                for (int i = 0; i < N_ITER; i++) {
+                    offset = noise(vec2(offset));
+                    float iter = float(i + 1);
+                    float perlin = dot(texture2D(noiseTexture, fract(vUv.xx / iter + offset)).rgb, vec3(1.0)) / 3.0;
+                    alt_height += perlin;
+
+                    float lod = 10.0 * iter * pow(1.5, iter);
+                    base_height += abs(sin(coords.x * lod + offset)) * magnitude;
+                    magnitude *= 0.7;
+                }
+
+                alt_height /= float(N_ITER);
+                alt_height = (alt_height - 0.7) * 3.0;
+                float height = base_height + (base_height * alt_height * 1.0);
+
+
+                if (coords.y > height) {
                     alpha = 0.0;
                 }
+
+                float dist = length(vCameraPos);
+                float fog_blend_value = clamp((dist - FOG_START) / FOG_END, 0.0, 1.0) + (0.06 * layer);
+                color = mix(color, HORIZON_COLOR, min(fog_blend_value, 1.0));
                 
-                gl_FragColor = vec4(vCameraPos, alpha);
+                gl_FragColor = vec4(color, alpha);
             }
         `,
-    });
+        });
+    };
 
-    const brush = new THREE.InstancedMesh(geometry, material, count);
-    brush.instanceMatrix.setUsage(THREE.StaticDrawUsage);
-
-    const dummy = new THREE.Object3D();
-    for (let i = 0; i < count; i++) {
-        dummy.position.set(Math.random() * depth, 0.5, Math.random() * width);
-        dummy.rotation.y = Math.PI / 2.0;
-        dummy.updateMatrix();
-        brush.setMatrixAt(i, dummy.matrix);
+    const brush = new THREE.Group();
+    for (let i = 0; i < layers; i++) {
+        const geometry = new THREE.PlaneGeometry(width, height);
+        const instance = new THREE.Mesh(
+            geometry,
+            makeMaterial(
+                Math.random(),
+                new THREE.Vector3(width, height, layers),
+                i
+            )
+        );
+        instance.position.z = -i * 0.2;
+        instance.position.y = height / 2;
+        brush.add(instance);
+        height *= 1.5;
     }
-
-    brush.instanceMatrix.needsUpdate = true;
 
     return brush;
 }
@@ -662,9 +679,15 @@ function createGround(width: number, depth: number): THREE.Mesh {
             varying vec3 vWorldPos;
 
             #define BASE_COLOR vec3(0.034, 0.055, 0.060)
+            #define HORIZON_COLOR vec3(0.176, 0.196, 0.314)
+            #define FOG_START 10.0
+            #define FOG_END 30.0
         
             void main() {
-                gl_FragColor = vec4(BASE_COLOR, 1.0);
+                float dist = length(vWorldPos);
+                float fog_blend_value = clamp((dist - FOG_START) / FOG_END, 0.0, 1.0);
+                vec3 color = mix(BASE_COLOR, HORIZON_COLOR, fog_blend_value);
+                gl_FragColor = vec4(color, 1.0);
             }
         `,
     });
@@ -674,6 +697,72 @@ function createGround(width: number, depth: number): THREE.Mesh {
     ground.rotateX(Math.PI / -2);
 
     return ground;
+}
+
+function createMidBuilding() {}
+
+function createDarkBuilding(
+    width: number,
+    depth: number,
+    height: number,
+    brightness: number
+): THREE.Mesh {
+    const geometry = new THREE.BoxGeometry(width, height, depth);
+    const material = new THREE.ShaderMaterial({
+        side: THREE.DoubleSide,
+        uniforms: { brightness: { value: brightness } },
+        vertexShader: /*glsl*/ `
+            precision lowp float;
+
+            varying vec2 vUv;
+            varying vec3 vWorldPos;
+            varying vec3 vNormal;
+            varying vec3 vCameraPos;
+
+            void main() {
+                vUv = uv;
+                vNormal = normal;
+                vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+                vCameraPos = (modelViewMatrix * vec4(position, 1.0)).xyz;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `,
+        fragmentShader: /* glsl */ `
+            precision lowp float;
+
+            varying vec2 vUv;
+            varying vec3 vWorldPos;
+            varying vec3 vNormal;
+            varying vec3 vCameraPos;
+
+            uniform float brightness;
+
+            #define HORIZON_COLOR vec3(0.176, 0.196, 0.314)
+            #define FOG_START 0.0
+            #define FOG_END 30.0
+        
+            void main() {
+                float direction = dot(normalize(vNormal), normalize(vec3(-1.0, 0.0, 0.0)));
+                vec3 color = HORIZON_COLOR * (brightness - max(0.1 * direction, 0.0));
+                float dist = length(vCameraPos);
+                float fog_blend_value = clamp((dist - FOG_START) / FOG_END, 0.0, 1.0);
+                color = mix(color, HORIZON_COLOR, fog_blend_value);
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `,
+    });
+
+    const building = new THREE.Mesh(geometry, material);
+    building.position.y = height / 2;
+    return building;
+}
+
+const dummy = new THREE.Object3D();
+
+function rotateTowardsCamera(object: THREE.Object3D, camera: THREE.Camera) {
+    dummy.position.copy(object.position);
+    dummy.lookAt(camera.position);
+    object.rotation.y = dummy.rotation.y;
 }
 
 function Environment() {
@@ -690,10 +779,19 @@ function Environment() {
             const camera = new THREE.PerspectiveCamera(
                 75,
                 window.innerWidth / window.innerHeight,
-                0.1,
+                0.01,
                 2000
             );
-            camera.position.set(-25, 5, -25);
+            camera.position.set(
+                -13.014682564973398,
+                0.26023915684972087,
+                -9.608193800634998
+            );
+            camera.rotation.set(
+                2.5972713696066094,
+                -1.2363717085292816,
+                2.622178772676298
+            );
 
             const scene = new THREE.Scene();
             const composer = new EffectComposer(renderer);
@@ -733,18 +831,70 @@ function Environment() {
 
             const grass = createGrass(15, 40000);
             grass.rotateY(Math.PI / 4);
-            grass.position.set(-15, 0, -10);
+            grass.position.set(-13, 0, -10);
             scene.add(grass);
 
-            const brush1 = createBrush(20, 1, 3);
+            const brush1 = createBrush(10, 1, 3, 0.2);
             brush1.position.x = -3;
-            brush1.position.z = -1;
-            //scene.add(brush1)
+            brush1.position.z = -2;
+            rotateTowardsCamera(brush1, camera);
+            brush1.rotation.y += Math.PI / -2;
+            scene.add(brush1);
 
-            //const controls = new OrbitControls(camera, renderer.domElement);
-            camera.lookAt(new THREE.Vector3(-15, 0, -15));
+            const brush2 = createBrush(10, 2, 3, 0.2);
+            brush2.position.x = -3;
+            brush2.position.z = 6;
+            rotateTowardsCamera(brush2, camera);
+            brush2.rotation.y += Math.PI / -2;
+            scene.add(brush2);
+
+            const brush3 = createBrush(10, 3, 3, 0.2);
+            brush3.position.x = -3;
+            brush3.position.z = 12;
+            rotateTowardsCamera(brush3, camera);
+            brush3.rotation.y += Math.PI / -2;
+            scene.add(brush3);
+
+            const darkBuilding1 = createDarkBuilding(1.5, 1.5, 2.5, 0.2);
+            darkBuilding1.position.x = -2;
+            darkBuilding1.position.z = 2.5;
+            scene.add(darkBuilding1);
+
+            const darkBuilding2 = createDarkBuilding(1.7, 1.7, 4, -0.3);
+            darkBuilding2.position.x = -4;
+            darkBuilding2.position.z = 12;
+            scene.add(darkBuilding2);
+
+            const leftBrush1 = createBrush(10, 1, 3, 0.2);
+            leftBrush1.position.x = 10;
+            leftBrush1.position.z = -17;
+            rotateTowardsCamera(leftBrush1, camera);
+            scene.add(leftBrush1);
+
+            const leftBrush2 = createBrush(10, 2, 3, 0.2);
+            leftBrush2.position.x = 5;
+            leftBrush2.position.z = -22;
+            rotateTowardsCamera(leftBrush2, camera);
+            scene.add(leftBrush2);
+
+            const leftDarkBuilding1 = createDarkBuilding(1.5, 1.5, 1.8, 0.2);
+            leftDarkBuilding1.position.x = 7;
+            leftDarkBuilding1.position.z = -15;
+            scene.add(leftDarkBuilding1);
+
+            const rain = createRain();
+            scene.add(rain);
+
+            const orb = new THREE.Mesh(
+                new THREE.SphereGeometry(0.3),
+                new THREE.MeshBasicMaterial({ color: new THREE.Color(1, 1, 1) })
+            );
+            //scene.add(orb);
+
             const clock = new THREE.Clock();
             const animate = () => {
+                const newTime = clock.getElapsedTime();
+
                 for (let block of [block1, block2, block3, block4]) {
                     for (let building of block.children) {
                         (
@@ -752,7 +902,7 @@ function Environment() {
                                 THREE.BoxGeometry,
                                 THREE.ShaderMaterial
                             >
-                        ).material.uniforms.time.value = clock.getElapsedTime();
+                        ).material.uniforms.time.value = newTime;
                     }
                 }
                 (
@@ -760,7 +910,8 @@ function Environment() {
                         THREE.BufferGeometry,
                         THREE.ShaderMaterial
                     >
-                ).material.uniforms.time.value = clock.getElapsedTime();
+                ).material.uniforms.time.value = newTime;
+                rain.material.uniforms.time.value = newTime;
                 composer.render();
 
                 if (false && clock.getElapsedTime() % 1 < 0.001) {
@@ -776,16 +927,18 @@ function Environment() {
                     );
                 }
             };
-            camera.position.set(
-                -13.014682564973398,
-                0.25023915684972087,
-                -9.608193800634998
+
+            orb.position.copy(camera.position);
+
+            rain.position.copy(camera.position);
+            rain.position.add(
+                camera
+                    .getWorldDirection(new THREE.Vector3())
+                    .multiplyScalar(0.12)
             );
-            camera.rotation.set(
-                2.5972713696066094,
-                -1.2363717085292816,
-                2.622178772676298
-            );
+            rain.lookAt(camera.position);
+
+            //const controls = new OrbitControls(camera, renderer.domElement);
             renderer.setAnimationLoop(animate);
             container.current.appendChild(renderer.domElement);
         }
@@ -854,8 +1007,6 @@ function MailboxSVG() {
 
 function AudioSVG({ muted }: { muted: boolean }) {
     const opacity = muted ? 100 : 0;
-
-    const lineOpacity = `transition-opacity opacity-${opacity}`;
     const waveOpacity = `transition-opacity opacity-${100 - opacity}`;
 
     return (
@@ -868,16 +1019,6 @@ function AudioSVG({ muted }: { muted: boolean }) {
                 fill="white"
             ></polygon>
             <circle r="20" cx="20" cy="50" fill="white"></circle>
-            <line
-                className={lineOpacity}
-                id="muted"
-                x1="-20"
-                x2="90"
-                y1="50"
-                y2="50"
-                stroke="white"
-                strokeWidth={10}
-            ></line>
             <path
                 className={waveOpacity}
                 id="smallWave"
@@ -945,7 +1086,7 @@ Nathan
 
 function Interface() {
     const [messageVisible, setMessageVisible] = useState(false);
-    const [volume, setVolume] = useState(0.2);
+    const [volume, setVolume] = useState(0.035);
     const [muted, setMuted] = useState(false);
 
     const ambientSound = new Howl({
@@ -960,6 +1101,7 @@ function Interface() {
     });
 
     useEffect(() => {
+        //ambientSound.play();
         bgMusic.play();
         return () => {
             bgMusic.stop();
@@ -1018,9 +1160,25 @@ function Interface() {
     );
 }
 
+function Vignette() {
+    return (
+        <div
+            id="vignette"
+            className="absolute pointer-events-none h-screen w-screen place-content-center flex z-10"
+        >
+            <div className="bg-black grow"></div>
+            <div id="leftVignette" className="bg-black min-w-[300px]"></div>
+            <div className="min-w-[1800px]"></div>
+            <div id="rightVignette" className="bg-black min-w-[300px]"></div>
+            <div className="bg-black grow"></div>
+        </div>
+    );
+}
+
 function Page() {
     return (
         <div className="max-h-screen overflow-hidden">
+            <Vignette></Vignette>
             <Environment></Environment>
             <Interface></Interface>
             <style>
@@ -1032,6 +1190,14 @@ function Page() {
                     height: 30%;
                     outline: none;
                     margin: auto;
+                }
+                
+                #leftVignette {
+                    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+                }
+
+                #rightVignette {
+                    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
                 }
                 
                 #message {
