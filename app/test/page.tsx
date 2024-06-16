@@ -4,11 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { EffectComposer } from "three/examples/jsm/Addons.js";
 import { RenderPixelatedPass } from "three/addons/postprocessing/RenderPixelatedPass.js";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-import { RectAreaLightHelper } from "three/addons/helpers/RectAreaLightHelper.js";
-import { GUI } from "lil-gui";
 import { Howl, Howler } from "howler";
-import { faWindowMinimize } from "@fortawesome/free-regular-svg-icons";
-import { ShaderPass } from "three/examples/jsm/Addons.js";
+import MESSAGE from "./message";
 
 function gaussianRandom(mean = 0, stdev = 1) {
     const u = 1 - Math.random(); // Converting [0,1) to (0,1]
@@ -883,13 +880,14 @@ function Environment() {
             scene.add(leftDarkBuilding1);
 
             const rain = createRain();
-            scene.add(rain);
-
-            const orb = new THREE.Mesh(
-                new THREE.SphereGeometry(0.3),
-                new THREE.MeshBasicMaterial({ color: new THREE.Color(1, 1, 1) })
+            rain.position.copy(camera.position);
+            rain.position.add(
+                camera
+                    .getWorldDirection(new THREE.Vector3())
+                    .multiplyScalar(0.12)
             );
-            //scene.add(orb);
+            rain.lookAt(camera.position);
+            scene.add(rain);
 
             const clock = new THREE.Clock();
             const animate = () => {
@@ -928,16 +926,6 @@ function Environment() {
                 }
             };
 
-            orb.position.copy(camera.position);
-
-            rain.position.copy(camera.position);
-            rain.position.add(
-                camera
-                    .getWorldDirection(new THREE.Vector3())
-                    .multiplyScalar(0.12)
-            );
-            rain.lookAt(camera.position);
-
             //const controls = new OrbitControls(camera, renderer.domElement);
             renderer.setAnimationLoop(animate);
             container.current.appendChild(renderer.domElement);
@@ -949,34 +937,134 @@ function Environment() {
     );
 }
 
-function MessageInput() {
-    const [userInput, setUserInput] = useState("");
+async function generateKeyFromPassword(password: string) {
+    // Encode password and salt as UTF-8
+    const enc = new TextEncoder();
+    const passwordKey = await window.crypto.subtle.importKey(
+        "raw",
+        enc.encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+    );
+    return window.crypto.subtle.deriveKey(
+        {
+            name: "PBKDF2",
+            salt: enc.encode(""),
+            iterations: 100000,
+            hash: "SHA-256",
+        },
+        passwordKey,
+        {
+            name: "AES-GCM",
+            length: 256,
+        },
+        false,
+        ["encrypt", "decrypt"]
+    );
+}
+
+async function encryptMessage(key: CryptoKey, message: string) {
+    const enc = new TextEncoder();
+    const encrypted = await window.crypto.subtle.encrypt(
+        {
+            name: "AES-GCM",
+            iv: new Uint8Array(12),
+        },
+        key,
+        enc.encode(message)
+    );
+    return new Uint8Array(encrypted);
+}
+
+async function decryptMessage(key: CryptoKey, encryptedMessage: BufferSource) {
+    const decrypted = await window.crypto.subtle.decrypt(
+        {
+            name: "AES-GCM",
+            iv: new Uint8Array(12),
+        },
+        key,
+        encryptedMessage
+    );
+    const dec = new TextDecoder();
+    return dec.decode(decrypted);
+}
+
+async function hashString(message: string) {
+    // Encode the message as a Uint8Array (required by the Web Crypto API)
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+
+    // Hash the data using SHA-256
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+    // Convert the ArrayBuffer to a hex string
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+
+    return hashHex;
+}
+
+function MessageInput({
+    setMessage,
+}: {
+    setMessage: React.Dispatch<React.SetStateAction<string>>;
+}) {
+    const password = "3ca0967058ce";
+    const passHash =
+        "cd05bb26311d55ab032d0e3e4b006cf454768814a828962b70d2052f5d824830";
+    const [userInput, setUserInput] = useState(password);
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <input
             ref={inputRef}
-            className="flex m-20 bg-black outline-none"
+            className="flex placeholder:text-white text-lg md:text-xl bg-transparent mt-[30vh] mb-[70vh] rounded-lg p-2 m-auto messageInput"
             value={userInput}
             type="text"
-            placeholder="enter text here"
+            placeholder="password"
             onKeyDown={(e) => {
                 if (e.key == "Enter") {
-                    if (userInput == "unihime") {
-                        alert("hehexd");
-                    } else {
-                        if (inputRef.current) {
-                            const currentClassName = inputRef.current.className;
-                            inputRef.current.className = `${currentClassName} rejectionAnim`;
-                            setTimeout(() => {
-                                if (inputRef.current) {
-                                    inputRef.current.className =
-                                        currentClassName;
-                                }
-                            }, 100);
+                    hashString(userInput).then((result) => {
+                        if (result == passHash) {
+                            generateKeyFromPassword(result).then((key) => {
+                                encryptMessage(key, MESSAGE).then((data) => {
+                                    console.log(
+                                        Buffer.from(data).toString("base64")
+                                    );
+                                    let newData = new Uint8Array(
+                                        Buffer.from(MESSAGE, "base64")
+                                    );
+                                    decryptMessage(key, newData).then(
+                                        (original) => {
+                                            setMessage(original);
+                                        }
+                                    );
+                                });
+                            });
+                        } else {
+                            if (inputRef.current) {
+                                inputRef.current.classList.remove(
+                                    "messageInput"
+                                );
+                                inputRef.current.classList.add(
+                                    "messageInputRejection"
+                                );
+                                setTimeout(() => {
+                                    if (inputRef.current) {
+                                        inputRef.current.classList.remove(
+                                            "messageInputRejection"
+                                        );
+                                        inputRef.current.classList.add(
+                                            "messageInput"
+                                        );
+                                    }
+                                }, 150);
+                            }
                         }
-                    }
-                    setUserInput("");
+                    });
                 }
             }}
             onChange={(e) => {
@@ -1068,25 +1156,10 @@ function Message({
     );
 }
 
-const message = `
-Ruka,
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Ut sed blandit orci</b>, a vulputate orci. Fusce dapibus elit vel metus pharetra condimentum. Quisque non nulla eu diam rutrum elementum. Vestibulum et mi a odio fringilla dapibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent nec dolor et eros porta finibus. Fusce porta vestibulum turpis sit amet pulvinar.
-
-Cras cursus, tellus ac pellentesque pulvinar, libero lacus rutrum justo, eu laoreet dolor nisi sit amet nunc. Integer dignissim rhoncus ante, ut molestie est blandit sed. Donec feugiat feugiat orci quis feugiat. Morbi erat nisl, pharetra consequat justo vel, congue euismod risus. Vivamus eget eros eget augue iaculis euismod. Mauris lobortis pharetra ipsum quis consectetur. Proin nisl diam, suscipit at aliquet eu, dignissim a sem. Phasellus mollis metus non bibendum interdum. Ut pulvinar scelerisque ante ut semper. Mauris consequat et felis id pharetra.
-
-In sit amet mauris pretium, lobortis enim ac, finibus tellus. Morbi porta rutrum ligula in suscipit. Sed non lacus nulla. Aliquam at nulla non diam pretium posuere vel luctus odio. Donec bibendum lacinia mauris, ut iaculis erat ullamcorper ac. Praesent pretium quis lorem sit amet laoreet. Mauris turpis tortor, tempus ac tempus ac, rhoncus vel ex.
-
-Pellentesque placerat quis turpis eu ornare. Cras sit amet urna id libero porta porta. Morbi a enim vel lacus dapibus placerat ut non nisl. Nullam egestas aliquet blandit. In at velit nec magna elementum porttitor nec id lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus luctus gravida elit ac congue. Curabitur finibus neque massa, porta maximus neque sagittis at. Aliquam erat volutpat. Ut viverra metus felis, ac dictum risus dignissim et. In pretium ultrices ex, non vestibulum nisi sollicitudin a.
-
-Love,
-
-Nathan
-`;
-
 function Interface() {
+    const [message, setMessage] = useState("");
     const [messageVisible, setMessageVisible] = useState(false);
-    const [volume, setVolume] = useState(0.035);
+    const [volume, setVolume] = useState(0.2);
     const [muted, setMuted] = useState(false);
 
     const rain = new Howl({
@@ -1098,11 +1171,14 @@ function Interface() {
     const bgMusic = new Howl({
         src: ["bg_music.mp3"],
         loop: true,
+        sprite: { song: [0, 205000] },
     });
 
     useEffect(() => {
         rain.play();
-        bgMusic.play();
+
+        bgMusic.play("song");
+
         return () => {
             bgMusic.stop();
             rain.stop();
@@ -1141,7 +1217,11 @@ function Interface() {
 
                 <div
                     id="messageControls"
-                    className=""
+                    className={
+                        message == ""
+                            ? "opacity-0 transition-opacity"
+                            : "transition-opacity"
+                    }
                     onClick={() => {
                         setMessageVisible(!messageVisible);
                     }}
@@ -1149,10 +1229,14 @@ function Interface() {
                     <MailboxSVG></MailboxSVG>
                 </div>
             </div>
-            <Message
-                messageVisible={messageVisible}
-                message={message}
-            ></Message>
+            {message == "" ? (
+                <MessageInput setMessage={setMessage}></MessageInput>
+            ) : (
+                <Message
+                    messageVisible={messageVisible}
+                    message={message}
+                ></Message>
+            )}
         </div>
     );
 }
@@ -1173,6 +1257,8 @@ function Vignette() {
 }
 
 function Page() {
+    const [message, setMessage] = useState("");
+
     return (
         <div className="fixed w-screen max-h-screen overflow-hidden">
             <Vignette></Vignette>
@@ -1180,6 +1266,18 @@ function Page() {
             <Interface></Interface>
             <style>
                 {`
+
+                .messageInput {
+                    color: white;
+                    outline: white solid 1px;
+                    transition: 0.1s ease-out;
+                }
+
+                .messageInputRejection {
+                    color: rgb(200, 100, 100);
+                    outline: rgb(200, 100, 100) solid 1px;
+                    transition: none !important;
+                }
                 
                 .volumeSlider {
                     -webkit-appearance: none;
