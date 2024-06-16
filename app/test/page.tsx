@@ -1089,10 +1089,10 @@ function Interface() {
     const [volume, setVolume] = useState(0.035);
     const [muted, setMuted] = useState(false);
 
-    const ambientSound = new Howl({
-        src: ["bg_sound.mp3"],
+    const rain = new Howl({
+        volume: 0.3,
+        src: ["rain.wav"],
         loop: true,
-        volume: 1,
     });
 
     const bgMusic = new Howl({
@@ -1101,10 +1101,11 @@ function Interface() {
     });
 
     useEffect(() => {
+        rain.play();
         bgMusic.play();
         return () => {
             bgMusic.stop();
-            ambientSound.stop();
+            rain.stop();
         };
     }, []);
 
@@ -1164,7 +1165,7 @@ function Vignette() {
         >
             <div className="bg-black grow"></div>
             <div id="leftVignette" className="bg-black min-w-[300px]"></div>
-            <div className="min-w-[1200px]"></div>
+            <div className="min-w-[1600px]"></div>
             <div id="rightVignette" className="bg-black min-w-[300px]"></div>
             <div className="bg-black grow"></div>
         </div>
