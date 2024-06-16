@@ -990,7 +990,7 @@ function MailboxSVG() {
     return (
         <svg
             className="w-full h-[100%] opacity-30 hover:opacity-60 transition-opacity"
-            viewBox="0 0 80 50"
+            viewBox="0 0 100 62.5"
         >
             <polygon
                 points="0,0 0,10 40,30 80,10 80,0"
@@ -1012,7 +1012,7 @@ function AudioSVG({ muted }: { muted: boolean }) {
     return (
         <svg
             className="w-full h-full grow opacity-30 hover:opacity-60 transition-opacity"
-            viewBox="-20 10 140 80"
+            viewBox="0 0 120 100"
         >
             <polygon
                 points="20,30 30,30 60,10 60,90 30,70 20,70"
@@ -1101,7 +1101,6 @@ function Interface() {
     });
 
     useEffect(() => {
-        //ambientSound.play();
         bgMusic.play();
         return () => {
             bgMusic.stop();
@@ -1116,11 +1115,8 @@ function Interface() {
     return (
         <div className="max-w-[800px] mx-auto">
             <div className="h-8 md:h-12"></div>
-            <div className="flex place-content-between h-6 md:h-8 mx-8 md:mx-12">
-                <div
-                    id="volumeControls"
-                    className="flex space-x-4 md:space-x-8 mr-12"
-                >
+            <div className="flex h-6 md:h-8 place-content-between mx-8">
+                <div id="volumeControls" className="flex space-x-4">
                     <div
                         onClick={() => {
                             setMuted(!muted);
@@ -1131,7 +1127,7 @@ function Interface() {
                     <input
                         id="volume"
                         type="range"
-                        className="volumeSlider w-1/2 opacity-30 hover:opacity-60 transition-opacity"
+                        className="volumeSlider opacity-30 hover:opacity-60 transition-opacity"
                         min={0}
                         max={1}
                         step={0.001}
@@ -1164,11 +1160,11 @@ function Vignette() {
     return (
         <div
             id="vignette"
-            className="absolute pointer-events-none h-screen w-screen place-content-center flex z-10"
+            className="absolute overflow-hidden pointer-events-none h-screen w-screen place-content-center flex z-10"
         >
             <div className="bg-black grow"></div>
             <div id="leftVignette" className="bg-black min-w-[300px]"></div>
-            <div className="min-w-[1800px]"></div>
+            <div className="min-w-[1200px]"></div>
             <div id="rightVignette" className="bg-black min-w-[300px]"></div>
             <div className="bg-black grow"></div>
         </div>
@@ -1177,7 +1173,7 @@ function Vignette() {
 
 function Page() {
     return (
-        <div className="max-h-screen overflow-hidden">
+        <div className="fixed w-screen max-h-screen overflow-hidden">
             <Vignette></Vignette>
             <Environment></Environment>
             <Interface></Interface>
@@ -1205,10 +1201,15 @@ function Page() {
                     max-height: 80vh;
                     overflow-y: scroll;
                     scrollbar-width: none;
+                    -ms-overflow-style: -ms-autohiding-scrollbar;
                     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
                 }
-                
-                
+
+                #message::-webkit-scrollbar {
+                    display: none;
+                    width: 0px;
+                    background-color: rgba(0, 0, 0, 0);
+                }
                 `}
             </style>
         </div>
