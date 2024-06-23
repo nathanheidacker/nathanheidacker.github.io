@@ -1012,10 +1012,9 @@ function MessageInput({
 }: {
     setMessage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const password = "3ca0967058ce";
     const passHash =
-        "cd05bb26311d55ab032d0e3e4b006cf454768814a828962b70d2052f5d824830";
-    const [userInput, setUserInput] = useState(password);
+        "5a1bdb19d16c7bdf2dd7d51990b703d94601a6823d848e1ace153c1cff2bc0f7";
+    const [userInput, setUserInput] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
@@ -1030,19 +1029,14 @@ function MessageInput({
                     hashString(userInput).then((result) => {
                         if (result == passHash) {
                             generateKeyFromPassword(result).then((key) => {
-                                encryptMessage(key, MESSAGE).then((data) => {
-                                    console.log(
-                                        Buffer.from(data).toString("base64")
-                                    );
-                                    let newData = new Uint8Array(
-                                        Buffer.from(MESSAGE, "base64")
-                                    );
-                                    decryptMessage(key, newData).then(
-                                        (original) => {
-                                            setMessage(original);
-                                        }
-                                    );
-                                });
+                                let newData = new Uint8Array(
+                                    Buffer.from(MESSAGE, "base64")
+                                );
+                                decryptMessage(key, newData).then(
+                                    (original) => {
+                                        setMessage(original);
+                                    }
+                                );
                             });
                         } else {
                             if (inputRef.current) {
@@ -1143,6 +1137,25 @@ function Message({
             <div className="h-[13vh]"></div>
             <div className="flex flex-col space-y-4">
                 {parts.map((part, index) => {
+                    if (part.startsWith("##")) {
+                        return (
+                            <p
+                                key={index}
+                                className="md:text-xl pt-6 font-bold"
+                            >
+                                {part.slice(2)}
+                            </p>
+                        );
+                    } else if (part.startsWith("#")) {
+                        return (
+                            <p
+                                key={index}
+                                className="text-lg md:text-2xl pt-8 font-bold"
+                            >
+                                {part.slice(1)}
+                            </p>
+                        );
+                    }
                     return (
                         <p
                             key={index}
@@ -1171,7 +1184,7 @@ function Interface() {
     const bgMusic = new Howl({
         src: ["bg_music.mp3"],
         loop: true,
-        sprite: { song: [0, 205000] },
+        sprite: { song: [1000, 200500] },
     });
 
     useEffect(() => {
