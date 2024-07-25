@@ -1013,7 +1013,7 @@ function MessageInput({
     setMessage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const passHash =
-        "5a1bdb19d16c7bdf2dd7d51990b703d94601a6823d848e1ace153c1cff2bc0f7DELETE";
+        "5a1bdb19d16c7bdf2dd7d51990b703d94601a6823d848e1ace153c1cff2bc0f7";
     const [userInput, setUserInput] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
