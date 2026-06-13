@@ -1013,7 +1013,7 @@ function MessageInput({
     setMessage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const passHash =
-        "5a1bdb19d16c7bdf2dd7d51990b703d94601a6823d848e1ace153c1cff2bc0f7";
+        "9f576a41d16f539c914a8832d7758312b55a456cbb4a31789144892ce3670a43";
     const [userInput, setUserInput] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -1175,26 +1175,40 @@ function Interface() {
     const [volume, setVolume] = useState(0.2);
     const [muted, setMuted] = useState(false);
 
-    const rain = new Howl({
-        volume: 0.3,
-        src: ["rain.wav"],
-        loop: true,
-    });
-
-    const bgMusic = new Howl({
-        src: ["bg_music.mp3"],
-        loop: true,
-        sprite: { song: [1000, 200500] },
-    });
-
     useEffect(() => {
-        rain.play();
+        // html5: true routes playback through the media channel so audio is
+        // not silenced by the iOS hardware ring/silent switch (Web Audio is).
+        const rain = new Howl({
+            volume: 0.3,
+            src: ["rain.wav"],
+            loop: true,
+            html5: true,
+        });
 
-        bgMusic.play("song");
+        const bgMusic = new Howl({
+            src: ["bg_music.mp3"],
+            loop: true,
+            html5: true,
+            sprite: { song: [1000, 200500] },
+        });
+
+        // html5 audio can't autoplay under browser autoplay policies, so try
+        // immediately (desktop) and (re)start on the first user gesture
+        // (required on mobile). The playing() guards make repeats no-ops.
+        const start = () => {
+            if (!rain.playing()) rain.play();
+            if (!bgMusic.playing()) bgMusic.play("song");
+        };
+
+        start();
+
+        const events = ["pointerdown", "touchend", "keydown"];
+        events.forEach((e) => window.addEventListener(e, start));
 
         return () => {
-            bgMusic.stop();
-            rain.stop();
+            events.forEach((e) => window.removeEventListener(e, start));
+            bgMusic.unload();
+            rain.unload();
         };
     }, []);
 
