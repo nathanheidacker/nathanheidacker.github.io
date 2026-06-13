@@ -1176,33 +1176,36 @@ function Interface() {
     const [muted, setMuted] = useState(false);
 
     useEffect(() => {
-        // html5: true routes playback through the media channel so audio is
-        // not silenced by the iOS hardware ring/silent switch (Web Audio is).
+        // Use Web Audio (Howler's default), not html5 audio: on iOS html5 audio
+        // can't mix multiple sources, ignores JS volume changes, and chokes on
+        // sprite seeking -- which broke the music and the volume/mute controls
+        // on mobile. Web Audio handles all of that; it just needs the suspended
+        // AudioContext resumed by a user gesture (handled below).
         const rain = new Howl({
             volume: 0.3,
-            src: ["rain.wav"],
+            src: ["rain.m4a"],
             loop: true,
-            html5: true,
         });
 
         const bgMusic = new Howl({
-            src: ["bg_music.mp3"],
+            src: ["bg_music.m4a"],
             loop: true,
-            html5: true,
             sprite: { song: [1000, 200500] },
         });
 
-        // html5 audio can't autoplay under browser autoplay policies, so try
-        // immediately (desktop) and (re)start on the first user gesture
-        // (required on mobile). The playing() guards make repeats no-ops.
+        // Browser autoplay policies block playback until a user gesture, so try
+        // immediately (desktop) and start on the first interaction (mobile).
+        // Once both are playing we stop listening so taps can't restart them.
+        const events = ["pointerdown", "touchend", "keydown"];
         const start = () => {
             if (!rain.playing()) rain.play();
             if (!bgMusic.playing()) bgMusic.play("song");
+            if (rain.playing() && bgMusic.playing()) {
+                events.forEach((e) => window.removeEventListener(e, start));
+            }
         };
 
         start();
-
-        const events = ["pointerdown", "touchend", "keydown"];
         events.forEach((e) => window.addEventListener(e, start));
 
         return () => {
